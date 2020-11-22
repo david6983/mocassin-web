@@ -3,16 +3,20 @@ import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import {ButtonModule} from 'primeng/button';
+import { MenuBarComponent } from './menu-bar.component';
+import {SharedModule} from 'primeng/api';
+import {MenubarModule} from 'primeng/menubar';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    MenuBarComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    ButtonModule
+    SharedModule,
+    MenubarModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
