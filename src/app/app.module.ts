@@ -4,10 +4,12 @@ import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import {ButtonModule} from 'primeng/button';
+import { ToolBarComponent } from './tool-bar.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    ToolBarComponent
   ],
   imports: [
     BrowserModule,
