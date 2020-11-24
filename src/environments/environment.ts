@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  mocassinApiUrl: 'http://localhost:3000/'
+  mocassinApiUrl: 'http://localhost:3000'
 };
 
 /*
