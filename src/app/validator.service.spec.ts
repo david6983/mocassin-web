@@ -81,9 +81,9 @@ describe('UtilityServiceService', () => {
 
   it('#isReservedWord should verify if the given name is reserved by the C language', () => {
     reservedWords.forEach((word) => {
-      expect(service.isReservedWord(word)).toBe(true);
+      service.isReservedWord(word).subscribe(value => {
+        expect(value).toBe(true);
+      });
     });
-
-    expect(service.isReservedWord('foobar')).toBe(false);
   });
 });

@@ -54,10 +54,18 @@ export class ValidatorService {
    * @param name name to check
    * @return 'true' if reserved, 'false' if not reserved
    */
-  isReservedWord(name: string): boolean {
-    return false;
+  isReservedWord(name: string): Observable<boolean> {
+    // use pipe instead of subscribe to return a value as Observable
+    return this.getReservedCWordsList().pipe(map(words => {
+      return words.findIndex(w => w === name) !== -1;
+    }));
   }
 
+  /**
+   * Get the list of the types supported by the C language from the server.
+   *
+   * @return An Observable on the list of type
+   */
   getCTypesList(): Observable<Ctype[]> {
     const url = `${this.apiUrl}/cTypes`;
     return this.http.get<Ctype[]>(url)
@@ -67,6 +75,12 @@ export class ValidatorService {
       );
   }
 
+  /**
+   * Get the list of the name's types supported by the C language from the server.
+   * This method will be usefull for a select component.
+   *
+   * @return An Observable on the list of type with the name only
+   */
   getTypesList(): Observable<string[]> {
     return this.getCTypesList().pipe(
       map(types => types.map(type => type.cType))
