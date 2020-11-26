@@ -1,7 +1,4 @@
 import {UnionAttribute} from './UnionAttribute';
+import {DataStructure} from './DataStructure';
 
-export interface Union {
-  id: number;
-  name: string;
-  attributes: UnionAttribute[];
-}
+export interface Union extends DataStructure<UnionAttribute>{}

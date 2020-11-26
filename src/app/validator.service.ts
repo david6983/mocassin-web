@@ -3,7 +3,7 @@ import {environment} from '../environments/environment';
 import {HttpClient} from '@angular/common/http';
 import {Observable, of} from 'rxjs';
 import {Ctype} from '../domain/Ctype';
-import {catchError, filter, map, tap} from 'rxjs/operators';
+import {catchError, map, tap} from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -105,7 +105,7 @@ export class ValidatorService {
    * @param operation - name of the operation that failed
    * @param result - optional value to return as the observable result
    */
-  private handleError<T>(operation = 'operation', result?: T): (error: any) => Observable<T> {
+  handleError<T>(operation = 'operation', result?: T): (error: any) => Observable<T> {
     return (error: any): Observable<T> => {
 
       // TODO: send the error to remote logging infrastructure

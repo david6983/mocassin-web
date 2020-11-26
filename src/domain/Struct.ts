@@ -1,8 +1,6 @@
 import {StructAttribute} from './StructAttribute';
+import {DataStructure} from './DataStructure';
 
-export interface Struct {
-  id: number;
-  name: string;
+export interface Struct extends DataStructure<StructAttribute>{
   isDisplayFunctionGenerated: boolean;
-  attributes: StructAttribute[];
 }

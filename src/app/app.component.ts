@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import {ValidatorService} from './validator.service';
+import {DataStructureService} from './data-structure.service';
 
 @Component({
   selector: 'app-root',
@@ -17,7 +18,10 @@ export class AppComponent {
   title = 'Mocassin';
   types;
 
-  constructor(private validatorService: ValidatorService) {
+  constructor(
+    private validatorService: ValidatorService,
+    private dataStructureService: DataStructureService
+  ) {
     validatorService.getReservedCWordsList();
     this.types = validatorService.getTypesList();
   }

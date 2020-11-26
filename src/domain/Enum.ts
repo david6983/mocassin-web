@@ -1,7 +1,4 @@
 import {EnumAttribute} from './EnumAttribute';
+import {DataStructure} from './DataStructure';
 
-export interface Enum {
-  id: number;
-  name: string;
-  attributes: EnumAttribute[];
-}
+export interface Enum extends DataStructure<EnumAttribute>{}
