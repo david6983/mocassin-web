@@ -6,7 +6,7 @@ describe('DataStructureIdService', () => {
   let service: DataStructureIdService;
 
   beforeEach(() => {
-    TestBed.configureTestingModule({});
+    TestBed.configureTestingModule({imports: []});
     service = TestBed.inject(DataStructureIdService);
   });
 
