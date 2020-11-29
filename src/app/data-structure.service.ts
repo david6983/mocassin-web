@@ -73,10 +73,7 @@ export class DataStructureService {
     }
   }
 
-  addDataStruct(myDataStruct: Enum | Union | Struct, type: TypeEnum) {
-    let url: string;
-    let subject = undefined;
-
+  generateIds(myDataStruct: Enum | Union | Struct) {
     // generate ids
     if (myDataStruct != undefined) {
       myDataStruct.id = this.idService.get();
@@ -86,6 +83,14 @@ export class DataStructureService {
         });
       }
     }
+  }
+
+  addDataStruct(myDataStruct: Enum | Union | Struct, type: TypeEnum) {
+    let url: string;
+    let subject = undefined;
+
+    // generate ids
+    this.generateIds(myDataStruct);
 
     // define url and subject to modify according to the type of myDataStruct
     [url, subject] = this.getUrlAndSubject(type)
@@ -111,7 +116,7 @@ export class DataStructureService {
       })
   }
 
-  editDataStruct<T>(myDataStruct: Enum | Union | Struct, type: TypeEnum) {
+  editDataStruct(myDataStruct: Enum | Union | Struct, type: TypeEnum) {
     let [url, subject] = this.getUrlAndSubject(type);
 
     this.http.put(`${url}/${myDataStruct.id}`, myDataStruct)
@@ -131,21 +136,6 @@ export class DataStructureService {
         }
         subject.next(subjectValue)
       })
-  }
-
-  searchDataStructByName<T>(term: string, type: TypeEnum): Observable<T[]> {
-    let url = this.getUrlAndSubject(type);
-
-    if (!term.trim()) {
-      // if not search term, return empty hero array.
-      return of([]);
-    }
-    return this.http.get<T[]>(`${url}/?name=${term}`).pipe(
-      tap(x => x.length ?
-        console.log(`found matching "${term}"`) :
-        console.log(`no matching "${term}"`)),
-      catchError(this.utilityService.handleError<T[]>('searchDataStructByName', []))
-    );
   }
 
   listAllNames(): string[] {
