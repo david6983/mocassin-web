@@ -1,11 +1,11 @@
 import {Injectable} from '@angular/core';
 import {environment} from '../environments/environment';
-import {BehaviorSubject, Observable, of} from 'rxjs';
+import {BehaviorSubject, merge, Observable, of} from 'rxjs';
 import {Enum} from '../domain/Enum';
 import {ValidatorService} from './validator.service';
 import {DataStructureIdService} from './data-structure-id.service';
 import {HttpClient} from '@angular/common/http';
-import {catchError, tap} from 'rxjs/operators';
+import {catchError, map, tap} from 'rxjs/operators';
 import {Union} from '../domain/Union';
 import {Struct} from '../domain/Struct';
 import {TypeEnum} from '../domain/TypeEnum';
@@ -20,10 +20,12 @@ export class DataStructureService {
   private enumUrl = `${this.apiUrl}/enums`;
   private unionUrl = `${this.apiUrl}/unions`;
   private structUrl = `${this.apiUrl}/structs`;
+  private nameUrl = `${this.apiUrl}/names`;
   // specific subjects for each data structures
   private enumSubject = new BehaviorSubject<Enum[]>([]);
   private unionSubject = new BehaviorSubject<Union[]>([]);
   private structSubject = new BehaviorSubject<Struct[]>([]);
+  private nameSubject = new BehaviorSubject<string[]>([]);
 
   constructor(
     private http: HttpClient,
@@ -48,6 +50,8 @@ export class DataStructureService {
       .subscribe(data => {
         this.structSubject.next(data);
       })
+
+    this.listAllNames()
   }
 
   getEnums(): Observable<Enum[]> {
@@ -60,6 +64,10 @@ export class DataStructureService {
 
   getStructs(): Observable<Union[]> {
     return this.structSubject.asObservable();
+  }
+
+  getNames(): Observable<string[]> {
+    return this.nameSubject.asObservable();
   }
 
   getUrlAndSubject(type: TypeEnum): [string, BehaviorSubject<Enum[] | Union[] | Struct[]>] {
@@ -102,6 +110,13 @@ export class DataStructureService {
         subjectValue.push(myDataStruct);
         subject.next(subjectValue);
       })
+    // add the name to the list of unique names
+    this.http.post(this.nameUrl, myDataStruct.name)
+      .subscribe(() => {
+        const subjectV = this.nameSubject.getValue()
+        subjectV.push(myDataStruct.name)
+        this.nameSubject.next(subjectV)
+      })
   }
 
   deleteDataStruct(myDataStruct: Enum | Union | Struct, type: TypeEnum) {
@@ -113,6 +128,14 @@ export class DataStructureService {
         const index: number = subjectValue.findIndex(c => c.id == myDataStruct.id)
         subjectValue.splice(index, 1)
         subject.next(subjectValue)
+      })
+    // delete the name to the list of unique names
+    this.http.delete(`${this.nameUrl}?name=${myDataStruct.name}`)
+      .subscribe(() => {
+        const subjectValue = this.nameSubject.getValue()
+        const index: number = subjectValue.findIndex(c => c == myDataStruct.name)
+        subjectValue.splice(index, 1)
+        this.nameSubject.next(subjectValue)
       })
   }
 
@@ -136,15 +159,28 @@ export class DataStructureService {
         }
         subject.next(subjectValue)
       })
+    // edit the name to the list of unique names
+    this.http.put(`${this.nameUrl}?name=${myDataStruct.name}`, myDataStruct.name)
+      .subscribe(() => {
+        const subjectValue = this.nameSubject.getValue()
+        const index: number = subjectValue.findIndex(c => c == myDataStruct.name)
+        subjectValue.splice(index, 1)
+        this.nameSubject.next(subjectValue)
+      })
   }
 
-  listAllNames(): string[] {
-    return this.enumSubject.getValue().map(v => v.name)
-      .concat(this.unionSubject.getValue().map(v => v.name))
-      .concat(this.structSubject.getValue().map(v => v.name))
+  listAllNames() {
+    this.http.get<string[]>(this.nameUrl)
+      .subscribe(data => {
+        this.nameSubject.next(data);
+      })
   }
 
   isUnique(name: string): boolean {
-    return this.listAllNames().indexOf(name) === -1
+    let isUnique = false;
+    this.nameSubject.subscribe(names => {
+      isUnique = names.indexOf(name) === -1
+    })
+    return isUnique
   }
 }
