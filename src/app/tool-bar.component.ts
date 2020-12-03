@@ -23,6 +23,10 @@ import {ToolbarModule} from 'primeng/toolbar';
       margin-left: 1rem;
       margin-right: 1rem;
     }
+
+    p-toolbar {
+      margin: 1rem;
+    }
   `]
 })
 export class ToolBarComponent implements OnInit {

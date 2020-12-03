@@ -1,14 +1,16 @@
 import { Component } from '@angular/core';
-import {ValidatorService} from './validator.service';
-import {DataStructureService} from './data-structure.service';
-import {Enum} from '../domain/Enum';
-import {TypeEnum} from '../domain/TypeEnum';
 
 @Component({
   selector: 'app-root',
   template: `
     <app-menu-bar></app-menu-bar>
     <app-tool-bar></app-tool-bar>
+    <div class="p-grid">
+      <div class="p-col-fixed" style="width:40%; height: auto">
+        <app-side-tree-view></app-side-tree-view>
+      </div>
+      <div class="p-col">Auto</div>
+    </div>
     <router-outlet></router-outlet>
   `,
   styles: []

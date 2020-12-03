@@ -10,12 +10,16 @@ import {ToolBarComponent} from './tool-bar.component';
 import {MenubarModule} from 'primeng/menubar';
 import {SharedModule} from 'primeng/api';
 import {ToolbarModule} from 'primeng/toolbar';
+import { SideTreeViewComponent } from './side-tree-view.component';
+import {AccordionModule} from 'primeng/accordion';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
     AppComponent,
     MenuBarComponent,
-    ToolBarComponent
+    ToolBarComponent,
+    SideTreeViewComponent,
   ],
   imports: [
     BrowserModule,
@@ -25,6 +29,8 @@ import {ToolbarModule} from 'primeng/toolbar';
     MenubarModule,
     SharedModule,
     ToolbarModule,
+    AccordionModule,
+    BrowserAnimationsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
