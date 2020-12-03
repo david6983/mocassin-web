@@ -7,6 +7,8 @@ import {TypeEnum} from '../domain/TypeEnum';
 @Component({
   selector: 'app-root',
   template: `
+    <app-menu-bar></app-menu-bar>
+    <app-tool-bar></app-tool-bar>
     <router-outlet></router-outlet>
   `,
   styles: []

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {ToolbarModule} from 'primeng/toolbar';
 
 @Component({
   selector: 'app-tool-bar',
@@ -13,9 +14,9 @@ import { Component, OnInit } from '@angular/core';
   `,
   styles: [`
     .container {
+      margin: 0 auto;
       border: 1px solid var(--surface-d);
       padding: 0.5rem;
-      text-align: center;
     }
 
     p-button {
