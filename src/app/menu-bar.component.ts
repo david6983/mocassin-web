@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {MenubarModule} from 'primeng/menubar';
 import {MenuItem} from 'primeng/api';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-menu-bar',
@@ -14,12 +15,17 @@ import {MenuItem} from 'primeng/api';
   styles: []
 })
 export class MenuBarComponent implements OnInit {
+  @Input() title;
   items: MenuItem[];
 
-  constructor() { }
+  constructor(private router: Router ) { }
 
   ngOnInit(): void {
     this.items = [
+      {
+        label: this.title,
+        disabled: true
+      },
       {
         label: 'File',
         items: [
@@ -68,15 +74,15 @@ export class MenuBarComponent implements OnInit {
   }
 
   createEnum(): void {
-    console.log('create enum');
+    this.router.navigate(['/createEnum']);
   }
 
   createStruct(): void {
-    console.log('create struct');
+    this.router.navigate(['/createStruct']);
   }
 
   createUnion(): void {
-    console.log('create union');
+    this.router.navigate(['/createUnion']);
   }
 
   changePackageName(): void {
