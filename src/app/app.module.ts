@@ -26,6 +26,7 @@ import { ChangePackageNameDialogComponent } from './change-package-name-dialog.c
 import {ContextMenuModule} from 'primeng/contextmenu';
 import {CardModule} from 'primeng/card';
 import {TableModule} from 'primeng/table';
+import {CheckboxModule} from 'primeng/checkbox';
 
 @NgModule({
   declarations: [
@@ -55,6 +56,7 @@ import {TableModule} from 'primeng/table';
     FormsModule,
     InputTextModule,
     CardModule,
+    CheckboxModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

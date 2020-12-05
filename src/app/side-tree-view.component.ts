@@ -15,11 +15,14 @@ import {TypeEnum} from '../domain/TypeEnum';
         <p-accordion [multiple]="true">
           <p-accordionTab header="Enums" [selected]="true">
             <div>
-              <div *ngFor="let e of (enums | async)" class="data-row">
-                <span class="data-name">{{ e.name }}</span>
+              <div *ngFor="let e of (enums | async)" class="p-card data-row p-d-flex p-jc-between">
+                <div>
+                  <p-checkbox name="unions" value="checked" class="p-mr-2" [disabled]="true"></p-checkbox>
+                  <span class="data-name p-mr-2">{{ e.name }}</span>
+                </div>
                 <div>
                   <button pButton type="button" label="Preview"></button>
-                  <button pButton type="button" label="Edit" class="p-button-warning"></button>
+                  <button pButton type="button" label="Edit" class="p-button-warning p-mr-2 p-ml-2"></button>
                   <button pButton type="button" (click)="deleteEnum(e)" label="Delete" class="p-button-danger"></button>
                 </div>
               </div>
@@ -27,11 +30,14 @@ import {TypeEnum} from '../domain/TypeEnum';
           </p-accordionTab>
           <p-accordionTab header="Unions" [selected]="true">
             <div>
-              <div *ngFor="let e of (unions | async)" class="data-row">
-                <span class="data-name">{{ e.name }}</span>
+              <div *ngFor="let e of (unions | async)" class="p-card data-row p-d-flex p-jc-between">
+                <div>
+                  <p-checkbox name="unions" value="checked" class="p-mr-2" [disabled]="true"></p-checkbox>
+                  <span class="data-name p-mr-2">{{ e.name }}</span>
+                </div>
                 <div>
                   <button pButton type="button" label="Preview"></button>
-                  <button pButton type="button" label="Edit" class="p-button-warning"></button>
+                  <button pButton type="button" label="Edit" class="p-button-warning p-mr-2 p-ml-2"></button>
                   <button pButton type="button" (click)="deleteUnion(e)" label="Delete" class="p-button-danger"></button>
                 </div>
               </div>
@@ -39,11 +45,14 @@ import {TypeEnum} from '../domain/TypeEnum';
           </p-accordionTab>
           <p-accordionTab header="Struct" [selected]="true">
             <div>
-              <div *ngFor="let e of (structs | async)" class="data-row">
-                <span class="data-name">{{ e.name }}</span>
+              <div *ngFor="let e of (structs | async)" class="p-card data-row p-d-flex p-jc-between">
+                <div>
+                  <p-checkbox name="unions" value="checked" class="p-mr-2" [disabled]="true"></p-checkbox>
+                  <span class="data-name p-mr-2">{{ e.name }}</span>
+                </div>
                 <div>
                   <button pButton type="button" label="Preview"></button>
-                  <button pButton type="button" label="Edit" class="p-button-warning"></button>
+                  <button pButton type="button" label="Edit" class="p-button-warning p-mr-2 p-ml-2"></button>
                   <button pButton type="button" (click)="deleteStruct(e)" label="Delete" class="p-button-danger"></button>
                 </div>
               </div>
@@ -55,9 +64,13 @@ import {TypeEnum} from '../domain/TypeEnum';
   `,
   styles: [`
     .data-row {
-      display: flex;
       align-items: center;
       margin-bottom: 1rem;
+      padding: 1rem;
+    }
+
+    .data-row:hover {
+      background-color: #f1f1f1;
     }
   `]
 })
