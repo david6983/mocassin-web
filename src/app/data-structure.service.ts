@@ -197,4 +197,15 @@ export class DataStructureService {
   getPackageName(): Observable<string> {
     return this.packageName.asObservable()
   }
+
+  renderEnum(e: Enum): string {
+    console.log(e)
+    let out = [];
+    out.push(`typedef enum ${e.name} {\n`);
+    e.attributes.forEach(attr => {
+      out.push(`\t${attr.name} = ${attr.value},\n`)
+    });
+    out.push(`} ${e.name};`)
+    return out.join("")
+  }
 }

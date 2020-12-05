@@ -21,7 +21,7 @@ import {TypeEnum} from '../domain/TypeEnum';
                   <span class="data-name p-mr-2">{{ e.name }}</span>
                 </div>
                 <div>
-                  <button pButton type="button" label="Preview"></button>
+                  <button pButton type="button" (click)="previewEnum(e)" label="Preview"></button>
                   <button pButton type="button" label="Edit" class="p-button-warning p-mr-2 p-ml-2"></button>
                   <button pButton type="button" (click)="deleteEnum(e)" label="Delete" class="p-button-danger"></button>
                 </div>
@@ -101,5 +101,9 @@ export class SideTreeViewComponent implements OnInit {
 
   deleteStruct(e: Struct) {
     this.dataStructureService.deleteDataStruct(e, TypeEnum.STRUCT);
+  }
+
+  previewEnum(e: Enum) {
+    console.log(this.dataStructureService.renderEnum(e))
   }
 }
