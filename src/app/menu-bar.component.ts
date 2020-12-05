@@ -62,10 +62,10 @@ export class MenuBarComponent implements OnInit {
         label: 'Preferences',
         items: [
           {label: 'Change package name', command: _ => this.changePackageName()},
-          {label: 'Change language', command: _ => this.changeLanguage()},
+          {label: 'Change language', command: _ => this.changeLanguage(), disabled: true},
         ]
       },
-      { label: 'Help', command: _ => this.help() }
+      { label: 'Source', command: _ => this.help() }
     ];
   }
 
@@ -110,6 +110,6 @@ export class MenuBarComponent implements OnInit {
   }
 
   help(): void {
-    console.log('open in a new tab the documentation or github wiki');
+    window.open('https://github.com/david6983/mocassin-web', "_blank")
   }
 }

@@ -1,16 +1,15 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {CodeModel} from '@ngstack/code-editor';
-import {PanelModule} from 'primeng/panel';
 
 @Component({
   selector: 'app-ccode-editor',
   template: `
-    <p-panel header="Edit C file">
+    <p-panel header='Preview of {{ filename }}'>
       <ngs-code-editor
         [theme]="theme"
+        [readOnly]="readonly"
         [codeModel]="codeModel"
         [options]="options"
-        (valueChanged)="onCodeChanged($event)"
       >
       </ngs-code-editor>
     </p-panel>
@@ -19,12 +18,17 @@ import {PanelModule} from 'primeng/panel';
   ]
 })
 export class CCodeEditorComponent implements OnInit {
-  theme = 'vs-dark';
+  @Input() filename: string = 'Code';
+  @Input() content: string = 'typedef struct hello {\n' +
+    '\n' +
+    '} hello;'
+  theme = 'vs';
+  readonly = true;
 
   codeModel: CodeModel = {
     language: 'c',
     uri: 'main.c',
-    value: '',
+    value: this.content,
   };
 
   options = {
@@ -33,10 +37,6 @@ export class CCodeEditorComponent implements OnInit {
       enabled: true,
     },
   };
-
-  onCodeChanged(value) {
-    console.log('CODE', value);
-  }
 
   constructor() { }
 
