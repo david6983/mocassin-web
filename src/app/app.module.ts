@@ -23,6 +23,9 @@ import {DialogModule} from 'primeng/dialog';
 import {FormsModule} from '@angular/forms';
 import {InputTextModule} from 'primeng/inputtext';
 import { ChangePackageNameDialogComponent } from './change-package-name-dialog.component';
+import {ContextMenuModule} from 'primeng/contextmenu';
+import {CardModule} from 'primeng/card';
+import {TableModule} from 'primeng/table';
 
 @NgModule({
   declarations: [
@@ -51,6 +54,7 @@ import { ChangePackageNameDialogComponent } from './change-package-name-dialog.c
     DialogModule,
     FormsModule,
     InputTextModule,
+    CardModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

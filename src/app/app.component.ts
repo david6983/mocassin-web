@@ -12,7 +12,6 @@ import {Observable} from 'rxjs';
     ></app-menu-bar>
     <app-tool-bar></app-tool-bar>
     <app-side-tree-view></app-side-tree-view>
-    <router-outlet></router-outlet>
     <app-change-package-name-dialog
       [display]="displayChangePackageNameDialog"
       (changedPackageName)="updatePackageName()"

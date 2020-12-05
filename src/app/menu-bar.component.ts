@@ -35,24 +35,7 @@ export class MenuBarComponent implements OnInit {
         label: 'File',
         items: [
           {label: 'New Project', command: _ => this.newProject()},
-          {label: 'Open from computer', command: _ => this.openFromComputer(), disabled: true},
-          {label: 'Save project locally', command: _ => this.saveProjectLocally()},
-          {label: 'Generate', command: _ => this.generate()}
-        ],
-      },
-      {
-        label: 'Generate',
-        icon: 'pi pi-fw pi-pencil',
-        items: [
-          {label: 'SList', command: _ => this.createSList()},
-          {label: 'DList', disabled: true},
-          {label: 'BTree', disabled: true},
-          {label: 'BSTree', disabled: true},
-          {label: 'Tree', disabled: true},
-          {label: 'QuadTree', disabled: true},
-          {label: 'R-Tree', disabled: true},
-          {label: 'Graph', disabled: true},
-          {label: 'Hash table', disabled: true},
+          {label: 'Save project locally', command: _ => this.saveProjectLocally()}
         ],
       },
       {
@@ -66,8 +49,7 @@ export class MenuBarComponent implements OnInit {
       {
         label: 'Preferences',
         items: [
-          {label: 'Change package name', command: _ => this.changePackageName()},
-          {label: 'Change language', command: _ => this.changeLanguage(), disabled: true},
+          {label: 'Change package name', command: _ => this.changePackageName()}
         ]
       },
       { label: 'Source', command: _ => this.help() }

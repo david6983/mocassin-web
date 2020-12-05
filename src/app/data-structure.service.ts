@@ -63,7 +63,7 @@ export class DataStructureService {
     return this.unionSubject.asObservable();
   }
 
-  getStructs(): Observable<Union[]> {
+  getStructs(): Observable<Struct[]> {
     return this.structSubject.asObservable();
   }
 
