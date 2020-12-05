@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {environment} from '../environments/environment';
-import {BehaviorSubject, merge, Observable, of} from 'rxjs';
+import {BehaviorSubject, merge, Observable, of, Subject} from 'rxjs';
 import {Enum} from '../domain/Enum';
 import {ValidatorService} from './validator.service';
 import {DataStructureIdService} from './data-structure-id.service';
@@ -26,6 +26,7 @@ export class DataStructureService {
   private unionSubject = new BehaviorSubject<Union[]>([]);
   private structSubject = new BehaviorSubject<Struct[]>([]);
   private nameSubject = new BehaviorSubject<string[]>([]);
+  private packageName = new BehaviorSubject<string>("no package name");
 
   constructor(
     private http: HttpClient,
@@ -182,5 +183,18 @@ export class DataStructureService {
       isUnique = names.indexOf(name) === -1
     })
     return isUnique
+  }
+
+  editPackageName(name: string) {
+    this.packageName.next(name);
+    console.log(this.packageName.getValue())
+  }
+
+  newProject(): void {
+    this.packageName.next("no package name");
+  }
+
+  getPackageName(): Observable<string> {
+    return this.packageName.asObservable()
   }
 }

@@ -1,7 +1,8 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {MenubarModule} from 'primeng/menubar';
 import {MenuItem} from 'primeng/api';
 import {Router} from '@angular/router';
+import {DataStructureService} from './data-structure.service';
 
 @Component({
   selector: 'app-menu-bar',
@@ -16,21 +17,25 @@ import {Router} from '@angular/router';
 })
 export class MenuBarComponent implements OnInit {
   @Input() title;
+  @Input() packageName;
+  @Output() displayPackageDialog = new EventEmitter();
   items: MenuItem[];
 
-  constructor(private router: Router ) { }
+  constructor(private router: Router
+  ) {
+  }
 
   ngOnInit(): void {
     this.items = [
       {
-        label: this.title,
+        label: this.title + ' (' + this.packageName + ')',
         disabled: true
       },
       {
         label: 'File',
         items: [
           {label: 'New Project', command: _ => this.newProject()},
-          {label: 'Open from computer', command: _ => this.openFromComputer()},
+          {label: 'Open from computer', command: _ => this.openFromComputer(), disabled: true},
           {label: 'Save project locally', command: _ => this.saveProjectLocally()},
           {label: 'Generate', command: _ => this.generate()}
         ],
@@ -87,6 +92,7 @@ export class MenuBarComponent implements OnInit {
 
   changePackageName(): void {
     console.log('change package name');
+    this.displayPackageDialog.emit(true);
   }
 
   changeLanguage(): void {

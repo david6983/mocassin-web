@@ -8,7 +8,7 @@ import {ToolbarModule} from 'primeng/toolbar';
       <div class="container">
         <p-button label="Generate" icon="pi pi-play" (click)="handleGenerate()"></p-button>
         <p-button label="Save" icon="pi pi-save" styleClass="p-button-success" (click)="handleSave()"></p-button>
-        <p-button label="Open" icon="pi pi-upload" styleClass="p-button-warning" (click)="handleOpen()"></p-button>
+        <p-button label="New" icon="pi pi-file" styleClass="p-button-warning" (click)="handleNew()"></p-button>
       </div>
     </p-toolbar>
   `,
@@ -44,7 +44,7 @@ export class ToolBarComponent implements OnInit {
     console.log('from toolbar: generate');
   }
 
-  handleOpen(): void {
-    console.log('from toolbar: open');
+  handleNew(): void {
+    console.log('from toolbar: New');
   }
 }

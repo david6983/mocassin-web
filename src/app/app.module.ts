@@ -19,6 +19,10 @@ import { CreateStructFormComponent } from './create-struct-form.component';
 import {CodeEditorModule} from '@ngstack/code-editor';
 import { CCodeEditorComponent } from './ccode-editor.component';
 import {PanelModule} from 'primeng/panel';
+import {DialogModule} from 'primeng/dialog';
+import {FormsModule} from '@angular/forms';
+import {InputTextModule} from 'primeng/inputtext';
+import { ChangePackageNameDialogComponent } from './change-package-name-dialog.component';
 
 @NgModule({
   declarations: [
@@ -30,6 +34,7 @@ import {PanelModule} from 'primeng/panel';
     CreateUnionFormComponent,
     CreateStructFormComponent,
     CCodeEditorComponent,
+    ChangePackageNameDialogComponent,
   ],
   imports: [
     BrowserModule,
@@ -43,6 +48,9 @@ import {PanelModule} from 'primeng/panel';
     BrowserAnimationsModule,
     CodeEditorModule.forRoot(),
     PanelModule,
+    DialogModule,
+    FormsModule,
+    InputTextModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

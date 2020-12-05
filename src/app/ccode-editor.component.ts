@@ -14,8 +14,7 @@ import {CodeModel} from '@ngstack/code-editor';
       </ngs-code-editor>
     </p-panel>
   `,
-  styles: [
-  ]
+  styles: []
 })
 export class CCodeEditorComponent implements OnInit {
   @Input() filename: string = 'Code';
