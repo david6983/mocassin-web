@@ -1,10 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {DataStructureService} from './data-structure.service';
 import {Observable} from 'rxjs';
 import {Enum} from '../domain/Enum';
 import {Union} from '../domain/Union';
 import {Struct} from '../domain/Struct';
 import {MenuItem} from 'primeng/api';
+import {TypeEnum} from '../domain/TypeEnum';
 
 @Component({
   selector: 'app-side-tree-view',
@@ -19,7 +20,7 @@ import {MenuItem} from 'primeng/api';
                 <div>
                   <button pButton type="button" label="Preview"></button>
                   <button pButton type="button" label="Edit" class="p-button-warning"></button>
-                  <button pButton type="button" label="Delete" class="p-button-danger"></button>
+                  <button pButton type="button" (click)="deleteEnum(e)" label="Delete" class="p-button-danger"></button>
                 </div>
               </div>
             </div>
@@ -31,7 +32,7 @@ import {MenuItem} from 'primeng/api';
                 <div>
                   <button pButton type="button" label="Preview"></button>
                   <button pButton type="button" label="Edit" class="p-button-warning"></button>
-                  <button pButton type="button" label="Delete" class="p-button-danger"></button>
+                  <button pButton type="button" (click)="deleteUnion(e)" label="Delete" class="p-button-danger"></button>
                 </div>
               </div>
             </div>
@@ -43,7 +44,7 @@ import {MenuItem} from 'primeng/api';
                 <div>
                   <button pButton type="button" label="Preview"></button>
                   <button pButton type="button" label="Edit" class="p-button-warning"></button>
-                  <button pButton type="button" label="Delete" class="p-button-danger"></button>
+                  <button pButton type="button" (click)="deleteStruct(e)" label="Delete" class="p-button-danger"></button>
                 </div>
               </div>
             </div>
@@ -75,5 +76,17 @@ export class SideTreeViewComponent implements OnInit {
   }
 
   ngOnInit() {
+  }
+
+  deleteEnum(e: Enum) {
+    this.dataStructureService.deleteDataStruct(e, TypeEnum.ENUM);
+  }
+
+  deleteUnion(e: Union) {
+    this.dataStructureService.deleteDataStruct(e, TypeEnum.UNION);
+  }
+
+  deleteStruct(e: Struct) {
+    this.dataStructureService.deleteDataStruct(e, TypeEnum.STRUCT);
   }
 }
