@@ -26,7 +26,7 @@ export class DataStructureService {
   private unionSubject = new BehaviorSubject<Union[]>([]);
   private structSubject = new BehaviorSubject<Struct[]>([]);
   private nameSubject = new BehaviorSubject<string[]>([]);
-  private packageName = new BehaviorSubject<string>("no package name");
+  private packageName = new BehaviorSubject<string>("no_package_name");
 
   constructor(
     private http: HttpClient,

@@ -1,15 +1,19 @@
 import { Component, OnInit } from '@angular/core';
-import {ToolbarModule} from 'primeng/toolbar';
+import {CodeModel} from '@ngstack/code-editor';
 
 @Component({
   selector: 'app-tool-bar',
   template: `
     <p-toolbar>
       <div class="container">
-        <p-button label="Save" icon="pi pi-save" styleClass="p-button-success" (click)="handleSave()"></p-button>
+        <p-button label="Generate" icon="pi pi-copy" styleClass="p-button-success" (click)="handleGenerate()"></p-button>
         <p-button label="New Project" icon="pi pi-file" styleClass="p-button-warning" (click)="handleNew()"></p-button>
       </div>
     </p-toolbar>
+    <p-dialog header="Final Render"
+              [(visible)]="displayGenerateDialog">
+      hello
+    </p-dialog>
   `,
   styles: [`
     .container {
@@ -29,14 +33,16 @@ import {ToolbarModule} from 'primeng/toolbar';
   `]
 })
 export class ToolBarComponent implements OnInit {
+  displayGenerateDialog: boolean = false;
 
   constructor() { }
 
   ngOnInit(): void {
   }
 
-  handleSave(): void {
+  handleGenerate(): void {
     console.log('from toolbar: save');
+    this.displayGenerateDialog = true;
   }
 
   handleNew(): void {

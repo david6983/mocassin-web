@@ -41,13 +41,6 @@ export class MenuBarComponent implements OnInit {
         disabled: true
       },
       {
-        label: 'File',
-        items: [
-          {label: 'New Project', command: _ => this.newProject()},
-          {label: 'Save project locally', command: _ => this.saveProjectLocally()}
-        ],
-      },
-      {
         label: 'New',
         items: [
           {label: 'Enum', command: _ => this.createEnum()},
@@ -83,26 +76,6 @@ export class MenuBarComponent implements OnInit {
 
   changePackageName(): void {
     this.displayPackageDialog.emit(true);
-  }
-
-  changeLanguage(): void {
-    console.log('change language');
-  }
-
-  newProject(): void {
-    console.log('new project');
-  }
-
-  openFromComputer(): void {
-    console.log('open from computer');
-  }
-
-  saveProjectLocally(): void {
-    console.log('save project locally');
-  }
-
-  generate(): void {
-    console.log('generate');
   }
 
   help(): void {
