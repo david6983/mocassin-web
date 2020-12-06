@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import {DataStructureService} from './data-structure.service';
-import {Observable} from 'rxjs';
+import {Observable, of} from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -8,32 +8,40 @@ import {Observable} from 'rxjs';
     <app-menu-bar
       [title]="title"
       (displayPackageDialog)="displayPackageNameDialog($event)"
-      [packageName]="(packageName | async)"
+      [packageName]="packageName | async"
     ></app-menu-bar>
     <app-tool-bar></app-tool-bar>
     <app-side-tree-view></app-side-tree-view>
+    <p-dialog header="Code Preview"
+              [(visible)]="displayChangePackageNameDialog"
+              *ngIf="packageName | async"
+              styleClass="code_dialog">
     <app-change-package-name-dialog
-      [display]="displayChangePackageNameDialog"
+      [packageName]="packageName | async"
       (changedPackageName)="updatePackageName()"
     ></app-change-package-name-dialog>
+    </p-dialog>
   `,
   styles: []
 })
 export class AppComponent {
   title = 'Mocassin';
   packageName: Observable<string>;
+  packageNameValue: string;
   displayChangePackageNameDialog: boolean = false;
 
   constructor(private dataService: DataStructureService) {
-    this.updatePackageName();
+    this.packageName = this.dataService.getPackageName();
+    this.packageName.subscribe(value => {
+      this.packageNameValue = value;
+    })
   }
 
   displayPackageNameDialog(value: boolean) {
-    console.log(value)
     this.displayChangePackageNameDialog = value;
   }
 
   updatePackageName() {
-    this.packageName = this.dataService.getPackageName()
+    this.displayChangePackageNameDialog = false;
   }
 }

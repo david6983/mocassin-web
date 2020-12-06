@@ -187,7 +187,6 @@ export class DataStructureService {
 
   editPackageName(name: string) {
     this.packageName.next(name);
-    console.log(this.packageName.getValue())
   }
 
   newProject(): void {

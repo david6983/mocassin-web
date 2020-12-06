@@ -4,17 +4,16 @@ import {DataStructureService} from './data-structure.service';
 @Component({
   selector: 'app-change-package-name-dialog',
   template: `
-    <p-dialog header="Change package name" [(visible)]="display">
-      <input type="text" pInputText [(ngModel)]="packageName" placeholder="enter a new name"/><br><br>
-      <p-button label="Change" (click)="changePackageName()"></p-button>
-    </p-dialog>
+      <div>
+        <input type="text" pInputText [(ngModel)]="packageName" placeholder="enter a new name"/><br><br>
+        <p-button label="Change" (click)="changePackageName()"></p-button>
+      </div>
   `,
   styles: [
   ]
 })
 export class ChangePackageNameDialogComponent implements OnInit {
-  packageName;
-  @Input() display: boolean = false;
+  @Input() packageName: string;
   @Output() changedPackageName = new EventEmitter<string>();
 
   constructor(private dataService: DataStructureService) {}
@@ -24,7 +23,6 @@ export class ChangePackageNameDialogComponent implements OnInit {
 
   changePackageName() {
     this.dataService.editPackageName(this.packageName);
-    this.changedPackageName.emit();
-    this.display = false;
+    this.changedPackageName.emit(this.packageName);
   }
 }

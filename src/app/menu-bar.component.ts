@@ -11,9 +11,18 @@ import {DataStructureService} from './data-structure.service';
       <ng-template pTemplate="start">
         <img src="../assets/logos/mocassin.svg" height="40" alt="mocassin logo">
       </ng-template>
+      <ng-template pTemplate="end">
+        <div class="package-name-text">
+          {{ packageName }}
+        </div>
+      </ng-template>
     </p-menubar>
   `,
-  styles: []
+  styles: [`
+    .package-name-text {
+      color: saddlebrown;
+    }
+  `]
 })
 export class MenuBarComponent implements OnInit {
   @Input() title;
@@ -28,7 +37,7 @@ export class MenuBarComponent implements OnInit {
   ngOnInit(): void {
     this.items = [
       {
-        label: this.title + ' (' + this.packageName + ')',
+        label: this.title,
         disabled: true
       },
       {
@@ -73,7 +82,6 @@ export class MenuBarComponent implements OnInit {
   }
 
   changePackageName(): void {
-    console.log('change package name');
     this.displayPackageDialog.emit(true);
   }
 
