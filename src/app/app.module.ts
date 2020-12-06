@@ -23,10 +23,9 @@ import {DialogModule} from 'primeng/dialog';
 import {FormsModule} from '@angular/forms';
 import {InputTextModule} from 'primeng/inputtext';
 import { ChangePackageNameDialogComponent } from './change-package-name-dialog.component';
-import {ContextMenuModule} from 'primeng/contextmenu';
 import {CardModule} from 'primeng/card';
-import {TableModule} from 'primeng/table';
 import {CheckboxModule} from 'primeng/checkbox';
+import { ClipboardModule } from '@angular/cdk/clipboard'
 
 @NgModule({
   declarations: [
@@ -57,6 +56,7 @@ import {CheckboxModule} from 'primeng/checkbox';
     InputTextModule,
     CardModule,
     CheckboxModule,
+    ClipboardModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

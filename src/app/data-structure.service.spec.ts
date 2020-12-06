@@ -67,13 +67,11 @@ describe('DataStructureService', () => {
         id: undefined,
         name: "notPrecise",
         type: "int",
-        isComparable: false,
         isPointer: true,
       }, {
         id: undefined,
         name: "precise",
         type: "float",
-        isComparable: false,
         isPointer: true,
       }]
     };
@@ -88,13 +86,11 @@ describe('DataStructureService', () => {
         id: undefined,
         name: "notPrecise",
         type: "int",
-        isComparable: false,
         isPointer: true,
       }, {
         id: undefined,
         name: "precise",
         type: "float",
-        isComparable: false,
         isPointer: true,
       }]
     };
