@@ -26,6 +26,10 @@ import { ChangePackageNameDialogComponent } from './change-package-name-dialog.c
 import {CardModule} from 'primeng/card';
 import {CheckboxModule} from 'primeng/checkbox';
 import { ClipboardModule } from '@angular/cdk/clipboard'
+import {StepsModule} from 'primeng/steps';
+import { CreateEnumWizardStep1Component } from './create-enum-wizard-step1.component';
+import { CreateEnumWizardStep2Component } from './create-enum-wizard-step2.component';
+import { CreateEnumWizardStepConfirmComponent } from './create-enum-wizard-step-confirm.component';
 
 @NgModule({
   declarations: [
@@ -38,6 +42,9 @@ import { ClipboardModule } from '@angular/cdk/clipboard'
     CreateStructFormComponent,
     CCodeEditorComponent,
     ChangePackageNameDialogComponent,
+    CreateEnumWizardStep1Component,
+    CreateEnumWizardStep2Component,
+    CreateEnumWizardStepConfirmComponent,
   ],
   imports: [
     BrowserModule,
@@ -57,6 +64,7 @@ import { ClipboardModule } from '@angular/cdk/clipboard'
     CardModule,
     CheckboxModule,
     ClipboardModule,
+    StepsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

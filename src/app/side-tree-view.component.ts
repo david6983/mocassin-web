@@ -12,7 +12,7 @@ import {CodeModel} from '@ngstack/code-editor';
   selector: 'app-side-tree-view',
   template: `
     <p-accordion [multiple]="true">
-      <p-accordionTab header="User Data Structures" [selected]="true">
+      <p-accordionTab header="User Data Structures" [selected]="false">
         <p-accordion [multiple]="true">
           <p-accordionTab header="Enums" [selected]="true">
             <div>
