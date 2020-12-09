@@ -7,6 +7,9 @@ import {Struct} from '../../../domain/Struct';
 import {MenuItem} from 'primeng/api';
 import {TypeEnum} from '../../../domain/TypeEnum';
 import {CodeModel} from '@ngstack/code-editor';
+import {EnumWizardService} from '../../services/wizards/enum-wizard.service';
+import {AppRoutingModule} from '../../app-routing.module';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-side-tree-view',
@@ -23,7 +26,7 @@ import {CodeModel} from '@ngstack/code-editor';
                 </div>
                 <div>
                   <button pButton type="button" (click)="previewEnum(e)" label="Preview"></button>
-                  <button pButton type="button" label="Edit" class="p-button-warning p-mr-2 p-ml-2"></button>
+                  <button pButton type="button" (click)="editEnum(e)" label="Edit" class="p-button-warning p-mr-2 p-ml-2"></button>
                   <button pButton type="button" (click)="deleteEnum(e)" label="Delete" class="p-button-danger"></button>
                 </div>
               </div>
@@ -107,7 +110,10 @@ export class SideTreeViewComponent implements OnInit {
   unions: Observable<Union[]>;
   structs: Observable<Struct[]>;
 
-  constructor(private dataStructureService: DataStructureService) {
+  constructor(private dataStructureService: DataStructureService,
+              private enumWizardService: EnumWizardService,
+              private router: Router
+  ) {
     this.enums = this.dataStructureService.getEnums();
     this.unions = this.dataStructureService.getUnions();
     this.structs = this.dataStructureService.getStructs();
@@ -155,5 +161,10 @@ export class SideTreeViewComponent implements OnInit {
     }
     this.namePreview = name;
     this.displayPreview = true;
+  }
+
+  editEnum(e: Enum) {
+    this.enumWizardService.fromEnum(e);
+    this.router.navigate(['/createEnum']);
   }
 }
