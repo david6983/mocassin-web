@@ -24,7 +24,8 @@ import {EnumWizardService} from '../../../../services/wizards/enum-wizard.servic
         </div>
       </ng-template>
       <ng-template pTemplate="footer">
-        <div class="p-grid p-nogutter p-justify-end">
+        <div class="p-grid p-nogutter p-justify-between">
+          <p-button label="Cancel" (onClick)="cancel()" icon="pi pi-times" iconPos="left" styleClass="p-button-danger"></p-button>
           <p-button label="Next" (onClick)="nextPage()" icon="pi pi-angle-right" iconPos="right" [disabled]="!newName"></p-button>
         </div>
       </ng-template>
@@ -51,5 +52,9 @@ export class CreateEnumWizardStep1Component implements OnInit {
       this.router.navigate(['createEnum/enum-step2']);
     }
     this.submitted = true;
+  }
+
+  cancel() {
+    this.router.navigate(['']);
   }
 }
