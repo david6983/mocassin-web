@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import {DataStructureService} from './data-structure.service';
+import {DataStructureService} from './services/data-structure.service';
 import {Observable, of} from 'rxjs';
 
 @Component({

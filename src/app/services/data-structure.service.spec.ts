@@ -2,11 +2,11 @@ import {TestBed} from '@angular/core/testing';
 
 import {DataStructureService} from './data-structure.service';
 import {HttpClientTestingModule, HttpTestingController, TestRequest} from '@angular/common/http/testing';
-import {environment} from '../environments/environment';
-import {TypeEnum} from '../domain/TypeEnum';
-import {Enum} from '../domain/Enum';
-import {Union} from '../domain/Union';
-import {Struct} from '../domain/Struct';
+import {environment} from '../../environments/environment';
+import {TypeEnum} from '../../domain/TypeEnum';
+import {Enum} from '../../domain/Enum';
+import {Union} from '../../domain/Union';
+import {Struct} from '../../domain/Struct';
 
 describe('DataStructureService', () => {
   let httpMock: HttpTestingController;

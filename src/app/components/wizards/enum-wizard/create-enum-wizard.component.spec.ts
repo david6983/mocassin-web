@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { CreateEnumFormComponent } from './create-enum-form.component';
+import { CreateEnumWizardComponent } from './create-enum-wizard.component';
 
 describe('CreateEnumFormComponent', () => {
-  let component: CreateEnumFormComponent;
-  let fixture: ComponentFixture<CreateEnumFormComponent>;
+  let component: CreateEnumWizardComponent;
+  let fixture: ComponentFixture<CreateEnumWizardComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ CreateEnumFormComponent ]
+      declarations: [ CreateEnumWizardComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(CreateEnumFormComponent);
+    fixture = TestBed.createComponent(CreateEnumWizardComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

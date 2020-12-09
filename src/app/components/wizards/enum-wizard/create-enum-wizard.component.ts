@@ -5,13 +5,15 @@ import {MenuItem} from 'primeng/api';
   selector: 'app-create-enum-form',
   template: `
     <div class="p-m-2">
-      <p-steps [model]="items" [readonly]="true" [(activeIndex)]="activeIndex"></p-steps>
+      <div class="p-mb-3">
+        <p-steps [model]="items" [readonly]="true" [(activeIndex)]="activeIndex"></p-steps>
+      </div>
       <router-outlet></router-outlet>
     </div>
   `,
   styles: []
 })
-export class CreateEnumFormComponent implements OnInit {
+export class CreateEnumWizardComponent implements OnInit {
   items: MenuItem[];
   activeIndex: number = 0;
 

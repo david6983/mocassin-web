@@ -1,11 +1,11 @@
 import {Component, OnInit} from '@angular/core';
-import {DataStructureService} from './data-structure.service';
+import {DataStructureService} from '../../services/data-structure.service';
 import {Observable} from 'rxjs';
-import {Enum} from '../domain/Enum';
-import {Union} from '../domain/Union';
-import {Struct} from '../domain/Struct';
+import {Enum} from '../../../domain/Enum';
+import {Union} from '../../../domain/Union';
+import {Struct} from '../../../domain/Struct';
 import {MenuItem} from 'primeng/api';
-import {TypeEnum} from '../domain/TypeEnum';
+import {TypeEnum} from '../../../domain/TypeEnum';
 import {CodeModel} from '@ngstack/code-editor';
 
 @Component({

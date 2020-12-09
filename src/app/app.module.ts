@@ -5,31 +5,29 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import {ButtonModule} from 'primeng/button';
 import { HttpClientModule } from '@angular/common/http';
-import {MenuBarComponent} from './menu-bar.component';
-import {ToolBarComponent} from './tool-bar.component';
+import {MenuBarComponent} from './components/main/menu-bar.component';
+import {ToolBarComponent} from './components/main/tool-bar.component';
 import {MenubarModule} from 'primeng/menubar';
 import {SharedModule} from 'primeng/api';
 import {ToolbarModule} from 'primeng/toolbar';
-import { SideTreeViewComponent } from './side-tree-view.component';
+import { SideTreeViewComponent } from './components/main/side-tree-view.component';
 import {AccordionModule} from 'primeng/accordion';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import { CreateEnumFormComponent } from './create-enum-form.component';
-import { CreateUnionFormComponent } from './create-union-form.component';
-import { CreateStructFormComponent } from './create-struct-form.component';
+import { CreateEnumWizardComponent } from './components/wizards/enum-wizard/create-enum-wizard.component';
 import {CodeEditorModule} from '@ngstack/code-editor';
-import { CCodeEditorComponent } from './ccode-editor.component';
+import { CCodeEditorComponent } from './components/dialogs/ccode-editor.component';
 import {PanelModule} from 'primeng/panel';
 import {DialogModule} from 'primeng/dialog';
 import {FormsModule} from '@angular/forms';
 import {InputTextModule} from 'primeng/inputtext';
-import { ChangePackageNameDialogComponent } from './change-package-name-dialog.component';
+import { ChangePackageNameFormComponent } from './components/dialogs/change-package-name-form.component';
 import {CardModule} from 'primeng/card';
 import {CheckboxModule} from 'primeng/checkbox';
 import { ClipboardModule } from '@angular/cdk/clipboard'
 import {StepsModule} from 'primeng/steps';
-import { CreateEnumWizardStep1Component } from './create-enum-wizard-step1.component';
-import { CreateEnumWizardStep2Component } from './create-enum-wizard-step2.component';
-import { CreateEnumWizardStepConfirmComponent } from './create-enum-wizard-step-confirm.component';
+import { CreateEnumWizardStep1Component } from './components/wizards/enum-wizard/steps/create-enum-wizard-step1.component';
+import { CreateEnumWizardStep2Component } from './components/wizards/enum-wizard/steps/create-enum-wizard-step2.component';
+import { CreateEnumWizardStepConfirmComponent } from './components/wizards/enum-wizard/steps/create-enum-wizard-step-confirm.component';
 
 @NgModule({
   declarations: [
@@ -37,11 +35,9 @@ import { CreateEnumWizardStepConfirmComponent } from './create-enum-wizard-step-
     MenuBarComponent,
     ToolBarComponent,
     SideTreeViewComponent,
-    CreateEnumFormComponent,
-    CreateUnionFormComponent,
-    CreateStructFormComponent,
+    CreateEnumWizardComponent,
     CCodeEditorComponent,
-    ChangePackageNameDialogComponent,
+    ChangePackageNameFormComponent,
     CreateEnumWizardStep1Component,
     CreateEnumWizardStep2Component,
     CreateEnumWizardStepConfirmComponent,

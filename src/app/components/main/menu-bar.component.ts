@@ -2,14 +2,14 @@ import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {MenubarModule} from 'primeng/menubar';
 import {MenuItem} from 'primeng/api';
 import {Router} from '@angular/router';
-import {DataStructureService} from './data-structure.service';
+import {DataStructureService} from '../../services/data-structure.service';
 
 @Component({
   selector: 'app-menu-bar',
   template: `
     <p-menubar [model]="items">
       <ng-template pTemplate="start">
-        <img src="../assets/logos/mocassin.svg" height="40" alt="mocassin logo">
+        <img src="../../../assets/logos/mocassin.svg" height="40" alt="mocassin logo">
       </ng-template>
       <ng-template pTemplate="end">
         <div class="package-name-text">

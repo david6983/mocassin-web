@@ -1,14 +1,14 @@
 import {Injectable} from '@angular/core';
-import {environment} from '../environments/environment';
+import {environment} from '../../environments/environment';
 import {BehaviorSubject, merge, Observable, of, Subject} from 'rxjs';
-import {Enum} from '../domain/Enum';
+import {Enum} from '../../domain/Enum';
 import {ValidatorService} from './validator.service';
 import {DataStructureIdService} from './data-structure-id.service';
 import {HttpClient} from '@angular/common/http';
 import {catchError, map, tap} from 'rxjs/operators';
-import {Union} from '../domain/Union';
-import {Struct} from '../domain/Struct';
-import {TypeEnum} from '../domain/TypeEnum';
+import {Union} from '../../domain/Union';
+import {Struct} from '../../domain/Struct';
+import {TypeEnum} from '../../domain/TypeEnum';
 
 @Injectable({
   providedIn: 'root'

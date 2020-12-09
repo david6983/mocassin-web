@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {DataStructureService} from './data-structure.service';
+import {DataStructureService} from '../../services/data-structure.service';
 
 @Component({
   selector: 'app-change-package-name-dialog',
@@ -12,7 +12,7 @@ import {DataStructureService} from './data-structure.service';
   styles: [
   ]
 })
-export class ChangePackageNameDialogComponent implements OnInit {
+export class ChangePackageNameFormComponent implements OnInit {
   @Input() packageName: string;
   @Output() changedPackageName = new EventEmitter<string>();
 

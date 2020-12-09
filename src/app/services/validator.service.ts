@@ -1,14 +1,18 @@
 import { Injectable } from '@angular/core';
-import {environment} from '../environments/environment';
+import {environment} from '../../environments/environment';
 import {HttpClient} from '@angular/common/http';
 import {Observable, of} from 'rxjs';
-import {Ctype} from '../domain/Ctype';
+import {Ctype} from '../../domain/Ctype';
 import {catchError, map, tap} from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ValidatorService {
+  private NOT_ALPHANUMERIC_MESSAGE = "The field is not alphanumeric (should contains only letters in any case, numbers and underscores)";
+  private NOT_UNIQUE_PROJECT = "The field already exist in another data structure in the project";
+  private NOT_UNIQUE = "The field already exist in this data structure";
+
   // get the API URL of Mocassin from environment variables
   private apiUrl = environment.mocassinApiUrl;
 
@@ -97,6 +101,18 @@ export class ValidatorService {
    */
   isNameSyntaxFollowCStandard(name: string): boolean {
     return this.cVariableSyntaxRegex.test(name);
+  }
+
+  notAlphanumericMessage(): string {
+    return this.NOT_ALPHANUMERIC_MESSAGE;
+  }
+
+  notUniqueInProject(): string {
+    return this.NOT_UNIQUE_PROJECT;
+  }
+
+  notUnique(): string {
+    return this.NOT_UNIQUE;
   }
 
   /**
