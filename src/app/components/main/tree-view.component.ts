@@ -17,7 +17,7 @@ import {StructWizardService} from '../../services/wizards/struct-wizard.service'
   selector: 'app-side-tree-view',
   template: `
     <p-accordion [multiple]="true">
-      <p-accordionTab header="User Data Structures" [selected]="false">
+      <p-accordionTab header="User Data Structures" [selected]="true">
         <p-accordion [multiple]="true">
           <p-accordionTab header="Enums" [selected]="true">
             <div>
@@ -100,7 +100,7 @@ import {StructWizardService} from '../../services/wizards/struct-wizard.service'
     }
   `]
 })
-export class SideTreeViewComponent implements OnInit {
+export class TreeViewComponent implements OnInit {
   displayPreview: boolean = false;
   namePreview: string;
   contentPreview: string;

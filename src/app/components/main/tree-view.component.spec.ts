@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { SideTreeViewComponent } from './side-tree-view.component';
+import { TreeViewComponent } from './tree-view.component';
 
 describe('SideTreeViewComponent', () => {
-  let component: SideTreeViewComponent;
-  let fixture: ComponentFixture<SideTreeViewComponent>;
+  let component: TreeViewComponent;
+  let fixture: ComponentFixture<TreeViewComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ SideTreeViewComponent ]
+      declarations: [ TreeViewComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(SideTreeViewComponent);
+    fixture = TestBed.createComponent(TreeViewComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

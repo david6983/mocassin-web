@@ -10,7 +10,7 @@ import {ToolBarComponent} from './components/main/tool-bar.component';
 import {MenubarModule} from 'primeng/menubar';
 import {SharedModule} from 'primeng/api';
 import {ToolbarModule} from 'primeng/toolbar';
-import { SideTreeViewComponent } from './components/main/side-tree-view.component';
+import { TreeViewComponent } from './components/main/tree-view.component';
 import {AccordionModule} from 'primeng/accordion';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { CreateEnumWizardComponent } from './components/wizards/enum-wizard/create-enum-wizard.component';
@@ -43,7 +43,7 @@ import {DropdownModule} from 'primeng/dropdown';
     AppComponent,
     MenuBarComponent,
     ToolBarComponent,
-    SideTreeViewComponent,
+    TreeViewComponent,
     CreateEnumWizardComponent,
     CCodeEditorComponent,
     ChangePackageNameFormComponent,
