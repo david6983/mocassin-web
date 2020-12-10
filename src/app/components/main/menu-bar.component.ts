@@ -9,7 +9,7 @@ import {DataStructureService} from '../../services/data-structure.service';
   template: `
     <p-menubar [model]="items">
       <ng-template pTemplate="start">
-        <img src="../../../assets/logos/mocassin.svg" height="40" alt="mocassin logo">
+        <img (click)="redirect()" src="../../../assets/logos/mocassin.svg" height="40" alt="mocassin logo">
       </ng-template>
       <ng-template pTemplate="end">
         <div class="package-name-text">
@@ -80,5 +80,9 @@ export class MenuBarComponent implements OnInit {
 
   help(): void {
     window.open('https://github.com/david6983/mocassin-web', "_blank")
+  }
+
+  redirect() {
+    this.router.navigate(['']);
   }
 }

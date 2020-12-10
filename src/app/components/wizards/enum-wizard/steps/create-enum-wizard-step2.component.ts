@@ -107,15 +107,14 @@ export class CreateEnumWizardStep2Component implements OnInit {
   }
 
   previousPage() {
-    let mode = this.modeService.getMode()
-    console.log(mode);
+    let mode = this.modeService.getMode();
     this.router.navigate(['createEnum/enum-step1/' + mode]);
   }
 
   addAttribute() {
     // update the form data
     this.attributes.push({id: undefined, name: this.name, value: this.value})
-    // rest form and increment the value because in a C enum, the value is automatically increased if u don't specify it
+    // reset form and increment the value because in a C enum, the value is automatically increased if u don't specify it
     this.value = this.value + 1;
     this.name = undefined;
   }

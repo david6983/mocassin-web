@@ -36,6 +36,7 @@ import { CreateStructWizardStep1Component } from './components/wizards/struct-wi
 import { CreateStructWizardStep2Component } from './components/wizards/struct-wizard/steps/create-struct-wizard-step2.component';
 import { CreateStructWizardComponent } from './components/wizards/struct-wizard/create-struct-wizard.component';
 import { CreateUnionWizardComponent } from './components/wizards/union-wizard/create-union-wizard.component';
+import {DropdownModule} from 'primeng/dropdown';
 
 @NgModule({
   declarations: [
@@ -76,7 +77,8 @@ import { CreateUnionWizardComponent } from './components/wizards/union-wizard/cr
     CardModule,
     CheckboxModule,
     ClipboardModule,
-    StepsModule
+    StepsModule,
+    DropdownModule
   ],
   providers: [],
   bootstrap: [AppComponent]

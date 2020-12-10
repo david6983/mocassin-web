@@ -1,6 +1,5 @@
-import {Component, EventEmitter, OnInit, Output} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
-import {ValidatorService} from '../../../../services/validator.service';
 import {EnumWizardService} from '../../../../services/wizards/enum-wizard.service';
 import {ModeService} from '../../../../services/wizards/mode-service';
 

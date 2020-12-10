@@ -74,7 +74,7 @@ export class ValidatorService {
     const url = `${this.apiUrl}/cTypes`;
     return this.http.get<Ctype[]>(url)
       .pipe(
-        tap(_ => console.log('fetched c types')),
+        tap(_ => _),
         catchError(this.handleError<Ctype[]>('getCTypesList', []))
       );
   }
