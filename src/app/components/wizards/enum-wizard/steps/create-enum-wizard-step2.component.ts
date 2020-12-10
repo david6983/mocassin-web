@@ -11,7 +11,7 @@ import {EnumWizardService} from '../../../../services/wizards/enum-wizard.servic
         Enum attributes
       </ng-template>
       <ng-template pTemplate="subtitle">
-        Add your own attributes in the enum {{ displayedEnumName }}
+        Add your own attributes in the enum {{ displayedname }}
       </ng-template>
       <ng-template pTemplate="content">
         <div class="p-fluid">
@@ -77,21 +77,21 @@ import {EnumWizardService} from '../../../../services/wizards/enum-wizard.servic
   `]
 })
 export class CreateEnumWizardStep2Component implements OnInit {
-  displayedEnumName: string
+  displayedname: string
   submitted: boolean = false;
   name: string;
   value: number = 0;
-  attributes: {name: string, value: number}[] = [];
+  attributes: EnumAttribute[] = [];
 
   constructor(private router: Router, private enumWizardService: EnumWizardService) { }
 
   ngOnInit(): void {
     let wizardData = this.enumWizardService.getEnumWizardData()
     // redirect to the previous step if the name was not defined
-    if (wizardData.enumName === undefined) {
+    if (wizardData.name === undefined) {
       this.previousPage()
     } else {
-      this.displayedEnumName = wizardData.enumName;
+      this.displayedname = wizardData.name;
       this.value = wizardData.attributes.length;
       this.attributes = wizardData.attributes;
     }
@@ -103,12 +103,14 @@ export class CreateEnumWizardStep2Component implements OnInit {
   }
 
   previousPage() {
-    this.router.navigate(['createEnum/enum-step1']);
+    let mode = this.enumWizardService.getMode()
+    console.log(mode);
+    this.router.navigate(['createEnum/enum-step1/' + mode]);
   }
 
   addAttribute() {
     // update the form data
-    this.attributes.push({name: this.name, value: this.value})
+    this.attributes.push({id: undefined, name: this.name, value: this.value})
     // rest form and increment the value because in a C enum, the value is automatically increased if u don't specify it
     this.value = this.value + 1;
     this.name = undefined;

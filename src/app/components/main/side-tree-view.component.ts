@@ -164,7 +164,7 @@ export class SideTreeViewComponent implements OnInit {
   }
 
   editEnum(e: Enum) {
-    this.enumWizardService.fromEnum(e);
-    this.router.navigate(['/createEnum']);
+    this.enumWizardService.enumWizardData = e;
+    this.router.navigate(['/createEnum/enum-step1/edit']);
   }
 }

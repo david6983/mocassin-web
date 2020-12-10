@@ -11,8 +11,8 @@ import {Observable, of} from 'rxjs';
       [packageName]="packageName | async"
     ></app-menu-bar>
     <app-tool-bar></app-tool-bar>
-    <app-side-tree-view></app-side-tree-view>
     <router-outlet></router-outlet>
+    <app-side-tree-view></app-side-tree-view>
     <p-dialog header="Code Preview"
               [(visible)]="displayChangePackageNameDialog"
               *ngIf="packageName | async"

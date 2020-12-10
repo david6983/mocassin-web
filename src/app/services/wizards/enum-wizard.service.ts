@@ -1,19 +1,17 @@
 import { Injectable } from '@angular/core';
-import {Subject} from 'rxjs';
 import {Enum} from '../../../domain/Enum';
 
 @Injectable({
   providedIn: 'root'
 })
 export class EnumWizardService {
-  enumWizardData = {
-    enumName: undefined,
+  private mode: string = "add";
+
+  enumWizardData: Enum = {
+    id: undefined,
+    name: undefined,
     attributes: []
   }
-
-  private createEnumWizardComplete = new Subject<any>();
-
-  createEnumWizardComplete$ = this.createEnumWizardComplete.asObservable()
 
   constructor() { }
 
@@ -25,41 +23,26 @@ export class EnumWizardService {
     this.enumWizardData = enumWizardData;
   }
 
-  complete() {
-    this.createEnumWizardComplete.next(this.enumWizardData)
-  }
-
-  toEnum(): Enum {
-    let e = {
-      id: undefined,
-      name: this.enumWizardData.enumName,
-      attributes: []
-    }
-    this.enumWizardData.attributes.forEach(attr => {
-      e.attributes.push({
-        id: undefined,
-        name: attr.name,
-        value: attr.value
-      })
-    })
-
-    return e;
-  }
-
   reset() {
     this.enumWizardData = {
-      enumName: undefined,
+      id: undefined,
+      name: undefined,
       attributes: []
     }
   }
 
-  fromEnum(e: Enum) {
-    this.enumWizardData.enumName = e.name;
-    e.attributes.forEach(attr => {
-      this.enumWizardData.attributes.push({
-        name: attr.name,
-        value: attr.value
-      })
-    })
+  setAddMode(name: string): boolean {
+    switch (name) {
+      case "add":
+      case "edit":
+        this.mode = name;
+        return true;
+      default:
+        return false;
+    }
+  }
+
+  getMode(): string {
+    return this.mode;
   }
 }

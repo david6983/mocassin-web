@@ -1,5 +1,5 @@
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
-import {Router} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {ValidatorService} from '../../../../services/validator.service';
 import {EnumWizardService} from '../../../../services/wizards/enum-wizard.service';
 
@@ -37,17 +37,27 @@ import {EnumWizardService} from '../../../../services/wizards/enum-wizard.servic
 export class CreateEnumWizardStep1Component implements OnInit {
   newName: string = undefined;
   submitted: boolean = false;
+  mode: string = undefined;
 
-  constructor(private router: Router, private enumWizardService: EnumWizardService) {
+  constructor(private router: Router,
+              private enumWizardService: EnumWizardService,
+              private route: ActivatedRoute
+  ) {
   }
 
   ngOnInit(): void {
-    this.newName = this.enumWizardService.getEnumWizardData().enumName;
+    this.newName = this.enumWizardService.getEnumWizardData().name;
+    let isModeValid = this.enumWizardService.setAddMode(this.route.snapshot.paramMap.get('mode'));
+    if (!isModeValid) {
+      this.router.navigate(['']);
+    }
+    this.mode = this.enumWizardService.getMode();
+    console.log(this.mode);
   }
 
   nextPage() {
     if (this.newName) {
-      this.enumWizardService.enumWizardData.enumName = this.newName;
+      this.enumWizardService.enumWizardData.name = this.newName;
       // we can go the next page
       this.router.navigate(['createEnum/enum-step2']);
     }

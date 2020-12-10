@@ -7,8 +7,8 @@ import {CreateEnumWizardStepConfirmComponent} from './components/wizards/enum-wi
 
 const routes: Routes = [
   { path: 'createEnum', component: CreateEnumWizardComponent, children: [
-      {path:'', redirectTo: 'enum-step1', pathMatch: 'full'},
-      {path: 'enum-step1', component: CreateEnumWizardStep1Component},
+      {path:'', redirectTo: 'enum-step1/add', pathMatch: 'full'},
+      {path: 'enum-step1/:mode', component: CreateEnumWizardStep1Component},
       {path: 'enum-step2', component: CreateEnumWizardStep2Component},
       {path: 'enum-step-confirm', component: CreateEnumWizardStepConfirmComponent}
     ]},

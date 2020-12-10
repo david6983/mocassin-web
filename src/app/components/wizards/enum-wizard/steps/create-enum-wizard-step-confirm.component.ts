@@ -17,7 +17,7 @@ import {TypeEnum} from '../../../../../domain/TypeEnum';
       <ng-template pTemplate="content">
         <div class="p-field p-col-12">
           <label for="class">Name</label><br>
-          <div class="p-mt-2"><b>{{ wizardData.enumName }}</b></div>
+          <div class="p-mt-2"><b>{{ wizardData.name }}</b></div>
         </div>
         <div class="p-field p-col-12">
           <label for="class">Attributes</label>
@@ -54,7 +54,7 @@ import {TypeEnum} from '../../../../../domain/TypeEnum';
   ]
 })
 export class CreateEnumWizardStepConfirmComponent implements OnInit {
-  wizardData: {enumName: any, attributes: any[]};
+  wizardData: {name: any, attributes: any[]};
 
   constructor(private router: Router,
               private enumWizardService: EnumWizardService,
@@ -63,16 +63,22 @@ export class CreateEnumWizardStepConfirmComponent implements OnInit {
   ngOnInit(): void {
     this.wizardData = this.enumWizardService.getEnumWizardData()
     // redirect to the previous step if the name was not defined
-    if (this.wizardData.enumName === undefined) {
+    if (this.wizardData.name === undefined) {
       this.router.navigate(['createEnum/enum-step1']);
     }
   }
 
   submit() {
-    // if the name doesn't exist, add it
-    this.dataStructureService.addDataStruct(this.enumWizardService.toEnum(), TypeEnum.ENUM);
-    // else it's an edit
-    //TODO if the name exist call edit instead of add
+    let mode = this.enumWizardService.getMode();
+    console.log(mode)
+    console.log(this.enumWizardService.enumWizardData);
+
+    if (mode === "add") {
+      this.dataStructureService.addDataStruct(this.enumWizardService.enumWizardData, TypeEnum.ENUM);
+    } else if (mode === "edit") {
+      this.dataStructureService.editDataStruct(this.enumWizardService.enumWizardData, TypeEnum.ENUM)
+    }
+
     this.enumWizardService.reset();
     this.router.navigate(['']);
   }
