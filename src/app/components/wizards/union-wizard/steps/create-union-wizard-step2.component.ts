@@ -47,7 +47,7 @@ import {Observable} from 'rxjs';
                 <div *ngFor="let attr of attributes" class="p-card attributes-row p-d-flex p-jc-between">
                   <div>
                     <p-checkbox name="unions" value="checked" class="p-mr-2" [disabled]="true"></p-checkbox>
-                    <span class="data-name p-mr-2">{{ attr.name }} ({{ attr.type }}{{ isPointer ? '*' : ''}})</span>
+                    <span class="data-name p-mr-2">{{ attr.name }} ({{ attr.type }}{{ attr.isPointer ? '*' : ''}})</span>
                   </div>
                   <div>
                     <button pButton (click)="deleteAttribute(attr.name)" type="button" icon="pi pi-times" class="p-button-rounded p-button-danger p-button-text"></button>
