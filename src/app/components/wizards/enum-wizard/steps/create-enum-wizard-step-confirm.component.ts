@@ -3,6 +3,7 @@ import {Router} from '@angular/router';
 import {EnumWizardService} from '../../../../services/wizards/enum-wizard.service';
 import {DataStructureService} from '../../../../services/data-structure.service';
 import {TypeEnum} from '../../../../../domain/TypeEnum';
+import {ModeService} from '../../../../services/wizards/mode-service';
 
 @Component({
   selector: 'app-create-enum-wizard-step-confirm',
@@ -58,7 +59,9 @@ export class CreateEnumWizardStepConfirmComponent implements OnInit {
 
   constructor(private router: Router,
               private enumWizardService: EnumWizardService,
-              private dataStructureService: DataStructureService) { }
+              private dataStructureService: DataStructureService,
+              private modeService: ModeService
+  ) { }
 
   ngOnInit(): void {
     this.wizardData = this.enumWizardService.getEnumWizardData()
@@ -69,9 +72,7 @@ export class CreateEnumWizardStepConfirmComponent implements OnInit {
   }
 
   submit() {
-    let mode = this.enumWizardService.getMode();
-    console.log(mode)
-    console.log(this.enumWizardService.enumWizardData);
+    let mode = this.modeService.getMode();
 
     if (mode === "add") {
       this.dataStructureService.addDataStruct(this.enumWizardService.enumWizardData, TypeEnum.ENUM);

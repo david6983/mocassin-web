@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
-import {Enum} from '../../../domain/Enum';
+import {Union} from '../../../domain/Union';
 
 @Injectable({
   providedIn: 'root'
 })
-export class EnumWizardService {
-  enumWizardData: Enum = {
+export class UnionWizardService {
+  unionWizardData: Union = {
     id: undefined,
     name: undefined,
     attributes: []
@@ -13,16 +13,16 @@ export class EnumWizardService {
 
   constructor() { }
 
-  getEnumWizardData() {
-    return this.enumWizardData;
+  getUnionWizardData() {
+    return this.unionWizardData;
   }
 
-  setEnumWizardData(data: Enum) {
-    this.enumWizardData = data;
+  setUnionWizardData(data: Union) {
+    this.unionWizardData = data;
   }
 
   reset() {
-    this.enumWizardData = {
+    this.unionWizardData = {
       id: undefined,
       name: undefined,
       attributes: []

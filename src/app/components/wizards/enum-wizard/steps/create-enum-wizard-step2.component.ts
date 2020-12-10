@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {Router} from '@angular/router';
 import {EnumAttribute} from '../../../../../domain/EnumAttribute';
 import {EnumWizardService} from '../../../../services/wizards/enum-wizard.service';
+import {ModeService} from '../../../../services/wizards/mode-service';
 
 @Component({
   selector: 'app-create-enum-wizard-step2',
@@ -83,7 +84,10 @@ export class CreateEnumWizardStep2Component implements OnInit {
   value: number = 0;
   attributes: EnumAttribute[] = [];
 
-  constructor(private router: Router, private enumWizardService: EnumWizardService) { }
+  constructor(private router: Router,
+              private enumWizardService: EnumWizardService,
+              private modeService: ModeService
+  ) { }
 
   ngOnInit(): void {
     let wizardData = this.enumWizardService.getEnumWizardData()
@@ -103,7 +107,7 @@ export class CreateEnumWizardStep2Component implements OnInit {
   }
 
   previousPage() {
-    let mode = this.enumWizardService.getMode()
+    let mode = this.modeService.getMode()
     console.log(mode);
     this.router.navigate(['createEnum/enum-step1/' + mode]);
   }

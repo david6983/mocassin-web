@@ -28,6 +28,14 @@ import {StepsModule} from 'primeng/steps';
 import { CreateEnumWizardStep1Component } from './components/wizards/enum-wizard/steps/create-enum-wizard-step1.component';
 import { CreateEnumWizardStep2Component } from './components/wizards/enum-wizard/steps/create-enum-wizard-step2.component';
 import { CreateEnumWizardStepConfirmComponent } from './components/wizards/enum-wizard/steps/create-enum-wizard-step-confirm.component';
+import { CreateUnionWizardStep1Component } from './components/wizards/union-wizard/steps/create-union-wizard-step1.component';
+import { CreateUnionWizardStep2Component } from './components/wizards/union-wizard/steps/create-union-wizard-step2.component';
+import { CreateUnionWizardStepConfirmComponent } from './components/wizards/union-wizard/steps/create-union-wizard-step-confirm.component';
+import { CreateStructWizardStepConfirmComponent } from './components/wizards/struct-wizard/steps/create-struct-wizard-step-confirm.component';
+import { CreateStructWizardStep1Component } from './components/wizards/struct-wizard/steps/create-struct-wizard-step1.component';
+import { CreateStructWizardStep2Component } from './components/wizards/struct-wizard/steps/create-struct-wizard-step2.component';
+import { CreateStructWizardComponent } from './components/wizards/struct-wizard/create-struct-wizard.component';
+import { CreateUnionWizardComponent } from './components/wizards/union-wizard/create-union-wizard.component';
 
 @NgModule({
   declarations: [
@@ -41,6 +49,14 @@ import { CreateEnumWizardStepConfirmComponent } from './components/wizards/enum-
     CreateEnumWizardStep1Component,
     CreateEnumWizardStep2Component,
     CreateEnumWizardStepConfirmComponent,
+    CreateUnionWizardStep1Component,
+    CreateUnionWizardStep2Component,
+    CreateUnionWizardStepConfirmComponent,
+    CreateStructWizardStepConfirmComponent,
+    CreateStructWizardStep1Component,
+    CreateStructWizardStep2Component,
+    CreateStructWizardComponent,
+    CreateUnionWizardComponent,
   ],
   imports: [
     BrowserModule,

@@ -2,6 +2,7 @@ import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {ValidatorService} from '../../../../services/validator.service';
 import {EnumWizardService} from '../../../../services/wizards/enum-wizard.service';
+import {ModeService} from '../../../../services/wizards/mode-service';
 
 @Component({
   selector: 'app-create-enum-wizard-step1',
@@ -41,18 +42,18 @@ export class CreateEnumWizardStep1Component implements OnInit {
 
   constructor(private router: Router,
               private enumWizardService: EnumWizardService,
+              private modeService: ModeService,
               private route: ActivatedRoute
   ) {
   }
 
   ngOnInit(): void {
     this.newName = this.enumWizardService.getEnumWizardData().name;
-    let isModeValid = this.enumWizardService.setAddMode(this.route.snapshot.paramMap.get('mode'));
+    let isModeValid = this.modeService.setAddMode(this.route.snapshot.paramMap.get('mode'));
     if (!isModeValid) {
       this.router.navigate(['']);
     }
-    this.mode = this.enumWizardService.getMode();
-    console.log(this.mode);
+    this.mode = this.modeService.getMode();
   }
 
   nextPage() {
