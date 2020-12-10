@@ -11,6 +11,7 @@ import {EnumWizardService} from '../../services/wizards/enum-wizard.service';
 import {AppRoutingModule} from '../../app-routing.module';
 import {Router} from '@angular/router';
 import {UnionWizardService} from '../../services/wizards/union-wizard.service';
+import {StructWizardService} from '../../services/wizards/struct-wizard.service';
 
 @Component({
   selector: 'app-side-tree-view',
@@ -57,7 +58,7 @@ import {UnionWizardService} from '../../services/wizards/union-wizard.service';
                 </div>
                 <div>
                   <button pButton type="button" (click)="previewStruct(e)" label="Preview"></button>
-                  <button pButton type="button" label="Edit" class="p-button-warning p-mr-2 p-ml-2"></button>
+                  <button pButton type="button" (click)="editStruct(e)" label="Edit" class="p-button-warning p-mr-2 p-ml-2"></button>
                   <button pButton type="button" (click)="deleteStruct(e)" label="Delete" class="p-button-danger"></button>
                 </div>
               </div>
@@ -114,6 +115,7 @@ export class SideTreeViewComponent implements OnInit {
   constructor(private dataStructureService: DataStructureService,
               private enumWizardService: EnumWizardService,
               private unionWizardService: UnionWizardService,
+              private structWizardService: StructWizardService,
               private router: Router
   ) {
     this.enums = this.dataStructureService.getEnums();
@@ -173,5 +175,10 @@ export class SideTreeViewComponent implements OnInit {
   editUnion(e: Union) {
     this.unionWizardService.unionWizardData = e;
     this.router.navigate(['/createUnion/union-step1/edit']);
+  }
+
+  editStruct(e: Struct) {
+    this.structWizardService.structWizardData = e;
+    this.router.navigate(['/createStruct/struct-step1/edit']);
   }
 }

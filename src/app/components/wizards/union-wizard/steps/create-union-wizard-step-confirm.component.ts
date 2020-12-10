@@ -67,7 +67,7 @@ export class CreateUnionWizardStepConfirmComponent implements OnInit {
     this.wizardData = this.unionWizardService.getUnionWizardData()
     // redirect to the previous step if the name was not defined
     if (this.wizardData.name === undefined) {
-      this.router.navigate(['createUnion/union-step1']);
+      this.router.navigate(['createUnion/']);
     }
   }
 

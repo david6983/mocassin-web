@@ -67,7 +67,7 @@ export class CreateEnumWizardStepConfirmComponent implements OnInit {
     this.wizardData = this.enumWizardService.getEnumWizardData()
     // redirect to the previous step if the name was not defined
     if (this.wizardData.name === undefined) {
-      this.router.navigate(['createEnum/enum-step1']);
+      this.router.navigate(['createEnum/']);
     }
   }
 

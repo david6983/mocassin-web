@@ -14,7 +14,7 @@ import {Observable} from 'rxjs';
         Union attributes
       </ng-template>
       <ng-template pTemplate="subtitle">
-        Add your own attributes in the union {{ displayedname }}
+        Add your own attributes in the union {{ displayedName }}
       </ng-template>
       <ng-template pTemplate="content">
         <div class="p-fluid">
@@ -32,7 +32,8 @@ import {Observable} from 'rxjs';
                 </div>
                 <div class="p-field">
                   <label for="type">Type</label>
-                  <p-dropdown inputId="type" [(ngModel)]="selectedType" [options]="(types | async)" placeholder="Select a type"></p-dropdown>
+                  <p-dropdown inputId="type" [(ngModel)]="selectedType" [options]="(types | async)"
+                              placeholder="Select a type"></p-dropdown>
                 </div>
                 <div class="p-field-checkbox">
                   <p-checkbox id="isPointer" [binary]="true" [(ngModel)]="isPointer"></p-checkbox>
@@ -50,7 +51,8 @@ import {Observable} from 'rxjs';
                     <span class="data-name p-mr-2">{{ attr.name }} ({{ attr.type }}{{ attr.isPointer ? '*' : ''}})</span>
                   </div>
                   <div>
-                    <button pButton (click)="deleteAttribute(attr.name)" type="button" icon="pi pi-times" class="p-button-rounded p-button-danger p-button-text"></button>
+                    <button pButton (click)="deleteAttribute(attr.name)" type="button" icon="pi pi-times"
+                            class="p-button-rounded p-button-danger p-button-text"></button>
                   </div>
                 </div>
                 <small *ngIf="attributes.length === 0" class="p-error">No attributes</small>
@@ -81,7 +83,7 @@ import {Observable} from 'rxjs';
   `]
 })
 export class CreateUnionWizardStep2Component implements OnInit {
-  displayedname: string
+  displayedName: string
   submitted: boolean = false;
   name: string;
   selectedType: string;
@@ -102,7 +104,7 @@ export class CreateUnionWizardStep2Component implements OnInit {
     if (wizardData.name === undefined) {
       this.previousPage()
     } else {
-      this.displayedname = wizardData.name;
+      this.displayedName = wizardData.name;
       this.attributes = wizardData.attributes;
     }
 
