@@ -15,7 +15,7 @@ import {AccordionModule} from 'primeng/accordion';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { CreateEnumWizardComponent } from './components/wizards/enum-wizard/create-enum-wizard.component';
 import {CodeEditorModule} from '@ngstack/code-editor';
-import { CCodeEditorComponent } from './components/dialogs/ccode-editor.component';
+import { CCodeEditorComponent } from './components/preview/ccode-editor.component';
 import {PanelModule} from 'primeng/panel';
 import {DialogModule} from 'primeng/dialog';
 import {FormsModule} from '@angular/forms';
@@ -37,6 +37,8 @@ import { CreateStructWizardStep2Component } from './components/wizards/struct-wi
 import { CreateStructWizardComponent } from './components/wizards/struct-wizard/create-struct-wizard.component';
 import { CreateUnionWizardComponent } from './components/wizards/union-wizard/create-union-wizard.component';
 import {DropdownModule} from 'primeng/dropdown';
+import { GenerateFinalCodePreviewComponent } from './components/preview/generate-final-code-preview.component';
+import { FinalCodeEditorComponent } from './components/preview/final-code-editor.component';
 
 @NgModule({
   declarations: [
@@ -58,6 +60,8 @@ import {DropdownModule} from 'primeng/dropdown';
     CreateStructWizardStep2Component,
     CreateStructWizardComponent,
     CreateUnionWizardComponent,
+    GenerateFinalCodePreviewComponent,
+    FinalCodeEditorComponent,
   ],
   imports: [
     BrowserModule,

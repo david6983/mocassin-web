@@ -12,6 +12,7 @@ import {CreateStructWizardStep2Component} from './components/wizards/struct-wiza
 import {CreateStructWizardStepConfirmComponent} from './components/wizards/struct-wizard/steps/create-struct-wizard-step-confirm.component';
 import {CreateStructWizardComponent} from './components/wizards/struct-wizard/create-struct-wizard.component';
 import {CreateStructWizardStep1Component} from './components/wizards/struct-wizard/steps/create-struct-wizard-step1.component';
+import {GenerateFinalCodePreviewComponent} from './components/preview/generate-final-code-preview.component';
 
 const routes: Routes = [
   { path: 'createEnum', component: CreateEnumWizardComponent, children: [
@@ -32,6 +33,7 @@ const routes: Routes = [
       {path: 'struct-step2', component: CreateStructWizardStep2Component},
       {path: 'struct-step-confirm', component: CreateStructWizardStepConfirmComponent}
     ]},
+  { path: 'generate', component: GenerateFinalCodePreviewComponent }
 ];
 
 @NgModule({

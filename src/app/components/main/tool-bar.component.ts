@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {CodeModel} from '@ngstack/code-editor';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-tool-bar',
@@ -10,10 +10,6 @@ import {CodeModel} from '@ngstack/code-editor';
         <p-button label="New Project" icon="pi pi-file" styleClass="p-button-warning" (click)="handleNew()"></p-button>
       </div>
     </p-toolbar>
-    <p-dialog header="Final Render"
-              [(visible)]="displayGenerateDialog">
-      hello
-    </p-dialog>
   `,
   styles: [`
     .container {
@@ -33,19 +29,16 @@ import {CodeModel} from '@ngstack/code-editor';
   `]
 })
 export class ToolBarComponent implements OnInit {
-  displayGenerateDialog: boolean = false;
-
-  constructor() { }
+  constructor(private router: Router) { }
 
   ngOnInit(): void {
   }
 
-  handleGenerate(): void {
-    console.log('from toolbar: save');
-    this.displayGenerateDialog = true;
-  }
-
   handleNew(): void {
     console.log('from toolbar: New');
+  }
+
+  handleGenerate() {
+    this.router.navigate(["/generate"])
   }
 }

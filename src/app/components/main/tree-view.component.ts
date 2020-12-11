@@ -8,7 +8,6 @@ import {MenuItem} from 'primeng/api';
 import {TypeEnum} from '../../../domain/TypeEnum';
 import {CodeModel} from '@ngstack/code-editor';
 import {EnumWizardService} from '../../services/wizards/enum-wizard.service';
-import {AppRoutingModule} from '../../app-routing.module';
 import {Router} from '@angular/router';
 import {UnionWizardService} from '../../services/wizards/union-wizard.service';
 import {StructWizardService} from '../../services/wizards/struct-wizard.service';
