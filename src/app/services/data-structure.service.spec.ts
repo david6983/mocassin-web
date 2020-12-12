@@ -219,7 +219,7 @@ describe('DataStructureService', () => {
 
     // expect the service to DELETE the name after POST
     expect(nameReq[1].request.method).toBe('POST');
-    const nameReq2 = httpMock.expectOne(nameUrl + '?name=' + e1.name)
+    const nameReq2 = httpMock.expectOne(nameUrl + '/' + e1.id)
     expect(nameReq2.request.method).toBe('DELETE');
 
     service.getEnums().subscribe(data => {
@@ -247,7 +247,7 @@ describe('DataStructureService', () => {
 
     // expect the service to DELETE the name after POST
     expect(nameReq[1].request.method).toBe('POST');
-    const nameReq2 = httpMock.expectOne(nameUrl + '?name=' + u1.name)
+    const nameReq2 = httpMock.expectOne(nameUrl + '/' + u1.id)
     expect(nameReq2.request.method).toBe('DELETE');
 
     service.getUnions().subscribe(data => {
@@ -275,7 +275,7 @@ describe('DataStructureService', () => {
 
     // expect the service to DELETE the name after POST
     expect(nameReq[1].request.method).toBe('POST');
-    const nameReq2 = httpMock.expectOne(nameUrl + '?name=' + s1.name)
+    const nameReq2 = httpMock.expectOne(nameUrl + '/' + s1.id)
     expect(nameReq2.request.method).toBe('DELETE');
 
     service.getStructs().subscribe(data => {
@@ -304,7 +304,7 @@ describe('DataStructureService', () => {
 
     // expect the service to DELETE the name after POST
     expect(nameReq[1].request.method).toBe('POST');
-    const nameReq2 = httpMock.expectOne(nameUrl + '?name=' + e1.name)
+    const nameReq2 = httpMock.expectOne(nameUrl + '/' + e1.id)
     expect(nameReq2.request.method).toBe('PUT');
 
     service.getEnums().subscribe(data => {
@@ -334,7 +334,7 @@ describe('DataStructureService', () => {
 
     // expect the service to DELETE the name after POST
     expect(nameReq[1].request.method).toBe('POST');
-    const nameReq2 = httpMock.expectOne(nameUrl + '?name=' + u1.name)
+    const nameReq2 = httpMock.expectOne(nameUrl + '/' + u1.id)
     expect(nameReq2.request.method).toBe('PUT');
 
     service.getUnions().subscribe(data => {
@@ -364,7 +364,7 @@ describe('DataStructureService', () => {
 
     // expect the service to DELETE the name after POST
     expect(nameReq[1].request.method).toBe('POST');
-    const nameReq2 = httpMock.expectOne(nameUrl + '?name=' + s1.name)
+    const nameReq2 = httpMock.expectOne(nameUrl + '/' + s1.id)
     expect(nameReq2.request.method).toBe('PUT');
 
     service.getStructs().subscribe(data => {
