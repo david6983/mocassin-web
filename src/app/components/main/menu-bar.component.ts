@@ -1,8 +1,6 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {MenubarModule} from 'primeng/menubar';
 import {MenuItem} from 'primeng/api';
 import {Router} from '@angular/router';
-import {DataStructureService} from '../../services/data-structure.service';
 
 @Component({
   selector: 'app-menu-bar',

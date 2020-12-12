@@ -11,7 +11,7 @@ import {EnumWizardService} from '../../services/wizards/enum-wizard.service';
 import {Router} from '@angular/router';
 import {UnionWizardService} from '../../services/wizards/union-wizard.service';
 import {StructWizardService} from '../../services/wizards/struct-wizard.service';
-
+//TODO refactor all the component
 @Component({
   selector: 'app-side-tree-view',
   template: `

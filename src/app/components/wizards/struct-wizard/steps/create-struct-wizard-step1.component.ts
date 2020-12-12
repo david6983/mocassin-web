@@ -11,13 +11,13 @@ import {ModeService} from '../../../../services/wizards/mode-service';
         Struct name
       </ng-template>
       <ng-template pTemplate="subtitle">
-        Enter the name of the new struct that should be unique in the package
+        Enter the name of the new struct that should be unique and alphanumeric in the package
       </ng-template>
       <ng-template pTemplate="content">
         <div class="p-fluid">
           <div class="p-field">
             <label for="name">Name</label>
-            <input #name="ngModel" id="name" type="text" required pInputText [(ngModel)]="newName"
+            <input #name="ngModel" id="name" type="text" pKeyFilter="alphanum" required pInputText [(ngModel)]="newName"
                    [ngClass]="{'p-invalid': (name.invalid && submitted) || (name.dirty && name.invalid)}">
             <small *ngIf="(name.invalid && submitted) || (name.dirty && name.invalid)" class="p-error">The name is required.</small>
           </div>

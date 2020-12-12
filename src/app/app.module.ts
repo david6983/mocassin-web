@@ -39,6 +39,7 @@ import { CreateUnionWizardComponent } from './components/wizards/union-wizard/cr
 import {DropdownModule} from 'primeng/dropdown';
 import { GenerateFinalCodePreviewComponent } from './components/preview/generate-final-code-preview.component';
 import { FinalCodeEditorComponent } from './components/preview/final-code-editor.component';
+import {KeyFilterModule} from 'primeng/keyfilter';
 
 @NgModule({
   declarations: [
@@ -82,7 +83,8 @@ import { FinalCodeEditorComponent } from './components/preview/final-code-editor
     CheckboxModule,
     ClipboardModule,
     StepsModule,
-    DropdownModule
+    DropdownModule,
+    KeyFilterModule
   ],
   providers: [],
   bootstrap: [AppComponent]

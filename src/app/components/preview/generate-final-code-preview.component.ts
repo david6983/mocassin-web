@@ -29,7 +29,7 @@ export class GenerateFinalCodePreviewComponent implements OnInit {
     this.finalRender.push(res)
     this.finalRender.push("\n\n")
   }
-
+  //TODO refactor this function
   handleGenerate(): void {
     this.dataStructureService.getEnums().subscribe(enums => {
       this.dataStructureService.getUnions().subscribe(unions => {

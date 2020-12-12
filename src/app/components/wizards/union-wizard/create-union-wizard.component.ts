@@ -23,7 +23,7 @@ export class CreateUnionWizardComponent implements OnInit {
   ngOnInit(): void {
     this.items = [
       {
-        label: 'Union basic infos',
+        label: 'Union infos',
         routerLink: 'union-step-1',
         command: (event: any) => {
           this.activeIndex = 0;

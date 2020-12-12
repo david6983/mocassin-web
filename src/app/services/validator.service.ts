@@ -9,28 +9,11 @@ import {catchError, map, tap} from 'rxjs/operators';
   providedIn: 'root'
 })
 export class ValidatorService {
-  private NOT_ALPHANUMERIC_MESSAGE = "The field is not alphanumeric (should contains only letters in any case, numbers and underscores)";
   private NOT_UNIQUE_PROJECT = "The field already exist in another data structure in the project";
   private NOT_UNIQUE = "The field already exist in this data structure";
 
   // get the API URL of Mocassin from environment variables
   private apiUrl = environment.mocassinApiUrl;
-
-  /**
-   * match only alphanumeric string
-   *
-   * Regex description :
-   *     ^ : start of string
-   *     [ : beginning of character group
-   *     a-z : any lowercase letter
-   *     A-Z : any uppercase letter
-   *     0-9 : any digit
-   *     _ : underscore
-   *     ] : end of character group
-   *     * : zero or more of the given characters
-   *     $ : end of string
-   */
-  private cVariableSyntaxRegex = new RegExp('^[a-zA-Z0-9_]*\$');
 
   constructor(
     private http: HttpClient // this service need to discuss with the server
@@ -89,22 +72,6 @@ export class ValidatorService {
     return this.getCTypesList().pipe(
       map(types => types.map(type => type.cType))
     );
-  }
-
-  /**
-   * The given string should be an alphanumeric string to follow the C syntax
-   *
-   * We use a regular expression to check the string
-   *
-   * @param name name of the attribute to verify
-   * @return true if follow the syntax
-   */
-  isNameSyntaxFollowCStandard(name: string): boolean {
-    return this.cVariableSyntaxRegex.test(name);
-  }
-
-  notAlphanumericMessage(): string {
-    return this.NOT_ALPHANUMERIC_MESSAGE;
   }
 
   notUniqueInProject(): string {

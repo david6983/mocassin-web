@@ -22,7 +22,7 @@ export class CreateEnumWizardComponent implements OnInit {
   ngOnInit(): void {
     this.items = [
       {
-        label: 'Enum name',
+        label: 'Enum infos',
         routerLink: 'enum-step-1',
         command: (event: any) => {
           this.activeIndex = 0;

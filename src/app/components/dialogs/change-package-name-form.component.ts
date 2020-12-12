@@ -5,7 +5,7 @@ import {DataStructureService} from '../../services/data-structure.service';
   selector: 'app-change-package-name-dialog',
   template: `
       <div>
-        <input type="text" pInputText [(ngModel)]="packageName" placeholder="enter a new name"/><br><br>
+        <input type="text" pInputText pKeyFilter="alphanum" [(ngModel)]="packageName" placeholder="enter a new name"/><br><br>
         <p-button label="Change" (click)="changePackageName()"></p-button>
       </div>
   `,

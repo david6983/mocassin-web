@@ -12,7 +12,7 @@ import {ModeService} from '../../../../services/wizards/mode-service';
         Enum attributes
       </ng-template>
       <ng-template pTemplate="subtitle">
-        Add your own attributes in the enum {{ displayedname }}
+        Add your own attributes in the enum {{ displayedname }} with a unique and alphanumeric name
       </ng-template>
       <ng-template pTemplate="content">
         <div class="p-fluid">
@@ -22,7 +22,7 @@ import {ModeService} from '../../../../services/wizards/mode-service';
               <div class="p-fluid p-mt-2">
                 <div class="p-field">
                   <label for="attributeName">Name</label>
-                  <input #attributeName="ngModel" id="attributeName" type="text" required pInputText [(ngModel)]="name"
+                  <input #attributeName="ngModel" id="attributeName" type="text" pKeyFilter="alphanum" required pInputText [(ngModel)]="name"
                          [ngClass]="{'p-invalid': (attributeName.invalid && submitted) || (attributeName.dirty && attributeName.invalid)}">
                   <small class="p-error" *ngIf="(attributeName.invalid && submitted )|| (attributeName.dirty && attributeName.invalid)">Attribute
                     name is

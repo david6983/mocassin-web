@@ -13,7 +13,7 @@ import {Observable, of} from 'rxjs';
     <app-tool-bar></app-tool-bar>
     <router-outlet></router-outlet>
     <app-side-tree-view></app-side-tree-view>
-    <p-dialog header="Code Preview"
+    <p-dialog header="Change the package name"
               [(visible)]="displayChangePackageNameDialog"
               *ngIf="packageName | async"
               styleClass="code_dialog">

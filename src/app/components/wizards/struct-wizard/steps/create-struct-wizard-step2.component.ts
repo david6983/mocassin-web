@@ -14,7 +14,7 @@ import {ValidatorService} from '../../../../services/validator.service';
         Struct attributes
       </ng-template>
       <ng-template pTemplate="subtitle">
-        Add your own attributes in the struct {{ displayedName }}
+        Add your own attributes in the struct {{ displayedName }} with a unique and alphanumeric name
       </ng-template>
       <ng-template pTemplate="content">
         <div class="p-fluid">
@@ -24,7 +24,7 @@ import {ValidatorService} from '../../../../services/validator.service';
               <div class="p-fluid p-mt-2">
                 <div class="p-field">
                   <label for="attributeName">Name</label>
-                  <input #attributeName="ngModel" id="attributeName" type="text" required pInputText [(ngModel)]="name"
+                  <input #attributeName="ngModel" id="attributeName" pKeyFilter="alphanum" type="text" required pInputText [(ngModel)]="name"
                          [ngClass]="{'p-invalid': (attributeName.invalid && submitted) || (attributeName.dirty && attributeName.invalid)}">
                   <small class="p-error" *ngIf="(attributeName.invalid && submitted )|| (attributeName.dirty && attributeName.invalid)">Attribute
                     name is
