@@ -36,7 +36,7 @@ import {DataStructureService} from '../../../../services/data-structure.service'
                   </div>
                   <div>
                     <small *ngIf="isUniqueInDataStruct" class="p-error">The name is not unique in this struct</small>
-                    <small *ngIf="isUnique" class="p-error">The name is not unique in the project scope (check the names of your data
+                    <small *ngIf="isUnique && !isReserved" class="p-error">The name is not unique in the project scope (check the names of your data
                       below)</small>
                     <small *ngIf="isReserved && !isUniqueInDataStruct" class="p-error">This word is reserved (check in step 1)</small>
                   </div>

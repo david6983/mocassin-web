@@ -13,8 +13,8 @@ import {Name} from '../../../domain/Name';
           <small *ngIf="(name.invalid && submitted) || (name.dirty && name.invalid)" class="p-error">The name is required.</small>
         </div>
         <div>
-          <small *ngIf="isUnique" class="p-error">The name is not unique in the project scope (check the names of your data below)</small>
-          <small *ngIf="isReserved" class="p-error">This word is reserved (check in the list below)</small>
+          <small *ngIf="isUnique && !isReserved" class="p-error">The name is not unique in the project scope (check the names of your data below)</small>
+          <small *ngIf="isReserved && !isUnique" class="p-error">This word is reserved (check in the list below)</small>
         </div>
         <div class="p-mt-2 p-mb-2"><app-reserved-words-inplace [reservedWords]="reservedWords"></app-reserved-words-inplace></div>
         <br>
