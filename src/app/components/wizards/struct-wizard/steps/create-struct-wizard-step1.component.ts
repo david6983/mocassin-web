@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {StructWizardService} from '../../../../services/wizards/struct-wizard.service';
 import {ModeService} from '../../../../services/wizards/mode-service';
+import {ValidatorService} from '../../../../services/validator.service';
+import {TypeEnum} from '../../../../../domain/TypeEnum';
 
 @Component({
   selector: 'app-create-struct-wizard-step1',
@@ -20,6 +22,7 @@ import {ModeService} from '../../../../services/wizards/mode-service';
             <input #name="ngModel" id="name" type="text" pKeyFilter="alphanum" required pInputText [(ngModel)]="newName"
                    [ngClass]="{'p-invalid': (name.invalid && submitted) || (name.dirty && name.invalid)}">
             <small *ngIf="(name.invalid && submitted) || (name.dirty && name.invalid)" class="p-error">The name is required.</small>
+            <small *ngIf="isUniqueDisplayError" class="p-error">The name is not unique in this struct (found in enum attributes in step 2)</small>
           </div>
           <div class="p-field-checkbox">
             <p-checkbox id="isDisplayFunctionGenerated" [binary]="true" [(ngModel)]="isDisplayFunctionGenerated"></p-checkbox>
@@ -41,13 +44,15 @@ import {ModeService} from '../../../../services/wizards/mode-service';
 export class CreateStructWizardStep1Component implements OnInit {
   newName: string = undefined;
   isDisplayFunctionGenerated: boolean = false;
+  isUniqueDisplayError: boolean = false;
   submitted: boolean = false;
   mode: string = undefined;
 
   constructor(private router: Router,
               private structWizardService: StructWizardService,
               private modeService: ModeService,
-              private route: ActivatedRoute
+              private route: ActivatedRoute,
+              private validator: ValidatorService
   ) {
   }
 
@@ -63,12 +68,19 @@ export class CreateStructWizardStep1Component implements OnInit {
 
   nextPage() {
     if (this.newName) {
-      this.structWizardService.structWizardData.name = this.newName;
-      this.structWizardService.structWizardData.isDisplayFunctionGenerated = this.isDisplayFunctionGenerated
-      // we can go the next page
-      this.router.navigate(['createStruct/struct-step2']);
+      let isUnique = this.validator.isNameUnique(this.newName, this.structWizardService.getStructWizardData(), TypeEnum.STRUCT);
+      if (isUnique) {
+        this.structWizardService.structWizardData.name = this.newName;
+        this.structWizardService.structWizardData.isDisplayFunctionGenerated = this.isDisplayFunctionGenerated
+        // we can go the next page
+        this.router.navigate(['createStruct/struct-step2']);
+        this.submitted = true;
+        this.isUniqueDisplayError = false;
+      } else {
+        this.isUniqueDisplayError = true;
+      }
     }
-    this.submitted = true;
+
   }
 
   cancel() {

@@ -2,6 +2,8 @@ import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {EnumWizardService} from '../../../../services/wizards/enum-wizard.service';
 import {ModeService} from '../../../../services/wizards/mode-service';
+import {ValidatorService} from '../../../../services/validator.service';
+import {TypeEnum} from '../../../../../domain/TypeEnum';
 
 @Component({
   selector: 'app-create-enum-wizard-step1',
@@ -20,6 +22,7 @@ import {ModeService} from '../../../../services/wizards/mode-service';
             <input #name="ngModel" id="name" type="text" pKeyFilter="alphanum" required pInputText [(ngModel)]="newName"
                    [ngClass]="{'p-invalid': (name.invalid && submitted) || (name.dirty && name.invalid)}">
             <small *ngIf="(name.invalid && submitted) || (name.dirty && name.invalid)" class="p-error">The name is required.</small>
+            <small *ngIf="isUniqueDisplayError" class="p-error">The name is not unique in this enum (found in enum attributes in step 2)</small>
           </div>
         </div>
       </ng-template>
@@ -37,12 +40,14 @@ import {ModeService} from '../../../../services/wizards/mode-service';
 export class CreateEnumWizardStep1Component implements OnInit {
   newName: string = undefined;
   submitted: boolean = false;
+  isUniqueDisplayError: boolean = false;
   mode: string = undefined;
 
   constructor(private router: Router,
               private enumWizardService: EnumWizardService,
               private modeService: ModeService,
-              private route: ActivatedRoute
+              private route: ActivatedRoute,
+              private validator: ValidatorService
   ) {
   }
 
@@ -57,11 +62,17 @@ export class CreateEnumWizardStep1Component implements OnInit {
 
   nextPage() {
     if (this.newName) {
-      this.enumWizardService.enumWizardData.name = this.newName;
-      // we can go the next page
-      this.router.navigate(['createEnum/enum-step2']);
+      let isUnique = this.validator.isNameUnique(this.newName, this.enumWizardService.getEnumWizardData(), TypeEnum.ENUM);
+      if (isUnique) {
+        this.enumWizardService.enumWizardData.name = this.newName;
+        // we can go the next page
+        this.router.navigate(['createEnum/enum-step2']);
+        this.submitted = true;
+        this.isUniqueDisplayError = false;
+      } else {
+        this.isUniqueDisplayError = true;
+      }
     }
-    this.submitted = true;
   }
 
   cancel() {

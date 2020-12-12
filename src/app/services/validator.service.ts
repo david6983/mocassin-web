@@ -1,16 +1,19 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {environment} from '../../environments/environment';
 import {HttpClient} from '@angular/common/http';
 import {Observable, of} from 'rxjs';
 import {Ctype} from '../../domain/Ctype';
 import {catchError, map, tap} from 'rxjs/operators';
+import {Enum} from '../../domain/Enum';
+import {Struct} from '../../domain/Struct';
+import {Union} from '../../domain/Union';
+import {TypeEnum} from '../../domain/TypeEnum';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ValidatorService {
   private NOT_UNIQUE_PROJECT = "The field already exist in another data structure in the project";
-  private NOT_UNIQUE = "The field already exist in this data structure";
 
   // get the API URL of Mocassin from environment variables
   private apiUrl = environment.mocassinApiUrl;
@@ -28,7 +31,7 @@ export class ValidatorService {
     const url = `${this.apiUrl}/reservedCWords`;
     return this.http.get<string[]>(url)
       .pipe(
-        tap(_ => console.log('fetched c words list')),
+        tap(_ => _),
         catchError(this.handleError<string[]>('getReservedCWordsList', []))
       );
   }
@@ -78,8 +81,30 @@ export class ValidatorService {
     return this.NOT_UNIQUE_PROJECT;
   }
 
-  notUnique(): string {
-    return this.NOT_UNIQUE;
+  isNameUnique(name: string, data: Enum | Union | Struct, type: TypeEnum): boolean {
+    switch(type) {
+      case TypeEnum.ENUM:
+        return (<Enum> data).attributes.map<string>(attr => attr.name).indexOf(name) === -1
+      case TypeEnum.UNION:
+        return (<Union> data).attributes.map<string>(attr => attr.name).indexOf(name) === -1
+      case TypeEnum.STRUCT:
+        return (<Struct> data).attributes.map<string>(attr => attr.name).indexOf(name) === -1
+      default:
+        return false
+    }
+  }
+
+  isAttributeNameUnique(name: string, data: Enum | Union | Struct, type: TypeEnum): boolean {
+    switch(type) {
+      case TypeEnum.ENUM:
+        return (name !== data.name) && (<Enum> data).attributes.map<string>(attr => attr.name).indexOf(name) === -1
+      case TypeEnum.UNION:
+        return (name !== data.name) && (<Union> data).attributes.map<string>(attr => attr.name).indexOf(name) === -1
+      case TypeEnum.STRUCT:
+        return (name !== data.name) && (<Struct> data).attributes.map<string>(attr => attr.name).indexOf(name) === -1
+      default:
+        return false
+    }
   }
 
   /**

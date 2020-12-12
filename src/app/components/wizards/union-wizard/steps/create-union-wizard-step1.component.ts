@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {ModeService} from '../../../../services/wizards/mode-service';
 import {UnionWizardService} from '../../../../services/wizards/union-wizard.service';
+import {ValidatorService} from '../../../../services/validator.service';
+import {TypeEnum} from '../../../../../domain/TypeEnum';
 
 @Component({
   selector: 'app-create-union-wizard-step1',
@@ -20,6 +22,7 @@ import {UnionWizardService} from '../../../../services/wizards/union-wizard.serv
             <input #name="ngModel" id="name" type="text" pKeyFilter="alphanum" required pInputText [(ngModel)]="newName"
                    [ngClass]="{'p-invalid': (name.invalid && submitted) || (name.dirty && name.invalid)}">
             <small *ngIf="(name.invalid && submitted) || (name.dirty && name.invalid)" class="p-error">The name is required.</small>
+            <small *ngIf="isUniqueDisplayError" class="p-error">The name is not unique in this enum (found in enum attributes in step 2)</small>
           </div>
         </div>
       </ng-template>
@@ -36,12 +39,14 @@ import {UnionWizardService} from '../../../../services/wizards/union-wizard.serv
 export class CreateUnionWizardStep1Component implements OnInit {
   newName: string = undefined;
   submitted: boolean = false;
+  isUniqueDisplayError: boolean = false;
   mode: string = undefined;
 
   constructor(private router: Router,
               private unionWizardService: UnionWizardService,
               private modeService: ModeService,
-              private route: ActivatedRoute
+              private route: ActivatedRoute,
+              private validator: ValidatorService
   ) {
   }
 
@@ -56,11 +61,17 @@ export class CreateUnionWizardStep1Component implements OnInit {
 
   nextPage() {
     if (this.newName) {
-      this.unionWizardService.unionWizardData.name = this.newName;
-      // we can go the next page
-      this.router.navigate(['createUnion/union-step2']);
+      let isUnique = this.validator.isNameUnique(this.newName, this.unionWizardService.getUnionWizardData(), TypeEnum.UNION);
+      if (isUnique) {
+        this.unionWizardService.unionWizardData.name = this.newName;
+        // we can go the next page
+        this.router.navigate(['createUnion/union-step2']);
+        this.submitted = true;
+        this.isUniqueDisplayError = false;
+      } else {
+        this.isUniqueDisplayError = true;
+      }
     }
-    this.submitted = true;
   }
 
   cancel() {

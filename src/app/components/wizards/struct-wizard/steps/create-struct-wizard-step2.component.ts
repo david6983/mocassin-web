@@ -5,6 +5,7 @@ import {Router} from '@angular/router';
 import {StructWizardService} from '../../../../services/wizards/struct-wizard.service';
 import {ModeService} from '../../../../services/wizards/mode-service';
 import {ValidatorService} from '../../../../services/validator.service';
+import {TypeEnum} from '../../../../../domain/TypeEnum';
 
 @Component({
   selector: 'app-create-struct-wizard-step2',
@@ -29,6 +30,7 @@ import {ValidatorService} from '../../../../services/validator.service';
                   <small class="p-error" *ngIf="(attributeName.invalid && submitted )|| (attributeName.dirty && attributeName.invalid)">Attribute
                     name is
                     required.</small>
+                  <small *ngIf="isUniqueDisplayError" class="p-error">The name is not unique in this enum</small>
                 </div>
                 <div class="p-field">
                   <label for="type">Type</label>
@@ -85,6 +87,7 @@ import {ValidatorService} from '../../../../services/validator.service';
 export class CreateStructWizardStep2Component implements OnInit {
   displayedName: string
   submitted: boolean = false;
+  isUniqueDisplayError: boolean = false;
   name: string;
   selectedType: string;
   isPointer: boolean;
@@ -123,11 +126,16 @@ export class CreateStructWizardStep2Component implements OnInit {
   }
 
   addAttribute() {
-    // update the form data
-    this.attributes.push({id: undefined, name: this.name, type: this.selectedType, isPointer: this.isPointer})
-    // reset form
-    this.name = undefined;
-    this.selectedType = undefined;
+    if (this.validator.isAttributeNameUnique(this.name, this.structWizardService.getStructWizardData(), TypeEnum.STRUCT)) {
+      // update the form data
+      this.attributes.push({id: undefined, name: this.name, type: this.selectedType, isPointer: this.isPointer})
+      // reset form
+      this.name = undefined;
+      this.selectedType = undefined;
+      this.isUniqueDisplayError = false;
+    } else {
+      this.isUniqueDisplayError = true;
+    }
   }
 
   deleteAttribute(name: string) {

@@ -177,14 +177,6 @@ export class DataStructureService {
       })
   }
 
-  isUnique(name: string): boolean {
-    let isUnique = false;
-    this.nameSubject.subscribe(names => {
-      isUnique = names.indexOf(name) === -1
-    })
-    return isUnique
-  }
-
   editPackageName(name: string) {
     this.packageName.next(name);
   }

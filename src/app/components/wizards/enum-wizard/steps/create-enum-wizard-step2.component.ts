@@ -1,8 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
 import {EnumAttribute} from '../../../../../domain/EnumAttribute';
 import {EnumWizardService} from '../../../../services/wizards/enum-wizard.service';
 import {ModeService} from '../../../../services/wizards/mode-service';
+import {ValidatorService} from '../../../../services/validator.service';
+import {TypeEnum} from '../../../../../domain/TypeEnum';
 
 @Component({
   selector: 'app-create-enum-wizard-step2',
@@ -27,6 +29,7 @@ import {ModeService} from '../../../../services/wizards/mode-service';
                   <small class="p-error" *ngIf="(attributeName.invalid && submitted )|| (attributeName.dirty && attributeName.invalid)">Attribute
                     name is
                     required.</small>
+                  <small *ngIf="isUniqueDisplayError" class="p-error">The name is not unique in this enum</small>
                 </div>
                 <div class="p-field">
                   <label for="enumValue">Value</label>
@@ -80,13 +83,15 @@ import {ModeService} from '../../../../services/wizards/mode-service';
 export class CreateEnumWizardStep2Component implements OnInit {
   displayedname: string
   submitted: boolean = false;
+  isUniqueDisplayError: boolean = false;
   name: string;
   value: number = 0;
   attributes: EnumAttribute[] = [];
 
   constructor(private router: Router,
               private enumWizardService: EnumWizardService,
-              private modeService: ModeService
+              private modeService: ModeService,
+              private validator: ValidatorService
   ) { }
 
   ngOnInit(): void {
@@ -112,11 +117,16 @@ export class CreateEnumWizardStep2Component implements OnInit {
   }
 
   addAttribute() {
-    // update the form data
-    this.attributes.push({id: undefined, name: this.name, value: this.value})
-    // reset form and increment the value because in a C enum, the value is automatically increased if u don't specify it
-    this.value = this.value + 1;
-    this.name = undefined;
+    if (this.validator.isAttributeNameUnique(this.name, this.enumWizardService.getEnumWizardData(), TypeEnum.ENUM)) {
+      // update the form data
+      this.attributes.push({id: undefined, name: this.name, value: this.value})
+      // reset form and increment the value because in a C enum, the value is automatically increased if u don't specify it
+      this.value = this.value + 1;
+      this.name = undefined;
+      this.isUniqueDisplayError = false;
+    } else {
+      this.isUniqueDisplayError = true;
+    }
   }
 
   deleteAttribute(name: string) {
