@@ -6,6 +6,8 @@ import {StructWizardService} from '../../../../services/wizards/struct-wizard.se
 import {ModeService} from '../../../../services/wizards/mode-service';
 import {ValidatorService} from '../../../../services/validator.service';
 import {TypeEnum} from '../../../../../domain/TypeEnum';
+import {Name} from '../../../../../domain/Name';
+import {DataStructureService} from '../../../../services/data-structure.service';
 
 @Component({
   selector: 'app-create-struct-wizard-step2',
@@ -27,10 +29,17 @@ import {TypeEnum} from '../../../../../domain/TypeEnum';
                   <label for="attributeName">Name</label>
                   <input #attributeName="ngModel" id="attributeName" pKeyFilter="alphanum" type="text" required pInputText [(ngModel)]="name"
                          [ngClass]="{'p-invalid': (attributeName.invalid && submitted) || (attributeName.dirty && attributeName.invalid)}">
-                  <small class="p-error" *ngIf="(attributeName.invalid && submitted )|| (attributeName.dirty && attributeName.invalid)">Attribute
-                    name is
-                    required.</small>
-                  <small *ngIf="isUniqueDisplayError" class="p-error">The name is not unique in this enum</small>
+                  <div>
+                    <small class="p-error" *ngIf="(attributeName.invalid && submitted )|| (attributeName.dirty && attributeName.invalid)">Attribute
+                      name is
+                      required.</small>
+                  </div>
+                  <div>
+                    <small *ngIf="isUniqueInDataStruct" class="p-error">The name is not unique in this struct</small>
+                    <small *ngIf="isUnique" class="p-error">The name is not unique in the project scope (check the names of your data
+                      below)</small>
+                    <small *ngIf="isReserved && !isUniqueInDataStruct" class="p-error">This word is reserved (check in step 1)</small>
+                  </div>
                 </div>
                 <div class="p-field">
                   <label for="type">Type</label>
@@ -87,7 +96,11 @@ import {TypeEnum} from '../../../../../domain/TypeEnum';
 export class CreateStructWizardStep2Component implements OnInit {
   displayedName: string
   submitted: boolean = false;
-  isUniqueDisplayError: boolean = false;
+  isUniqueInDataStruct: boolean = false;
+  isUnique: boolean = false;
+  isReserved: boolean = false;
+  reservedWords: Observable<string[]>;
+  names: Observable<Name[]>;
   name: string;
   selectedType: string;
   isPointer: boolean;
@@ -97,10 +110,13 @@ export class CreateStructWizardStep2Component implements OnInit {
   constructor(private router: Router,
               private structWizardService: StructWizardService,
               private modeService: ModeService,
-              private validator: ValidatorService
+              private validator: ValidatorService,
+              private dataStructureService: DataStructureService
   ) { }
 
   ngOnInit(): void {
+    this.names = this.dataStructureService.getNames();
+    this.reservedWords = this.validator.getReservedCWordsList();
     let wizardData = this.structWizardService.getStructWizardData();
 
     // redirect to the previous step if the name was not defined
@@ -127,14 +143,30 @@ export class CreateStructWizardStep2Component implements OnInit {
 
   addAttribute() {
     if (this.validator.isAttributeNameUnique(this.name, this.structWizardService.getStructWizardData(), TypeEnum.STRUCT)) {
-      // update the form data
-      this.attributes.push({id: undefined, name: this.name, type: this.selectedType, isPointer: this.isPointer})
-      // reset form
-      this.name = undefined;
-      this.selectedType = undefined;
-      this.isUniqueDisplayError = false;
+      this.reservedWords.subscribe(words => {
+        if (!this.validator.isReservedWord(this.name, words)) {
+          this.names.subscribe(names => {
+            if (!this.validator.isReservedWord(this.name, names.map(names => names.name))) {
+              // update the form data
+              this.attributes.push({id: undefined, name: this.name, type: this.selectedType, isPointer: this.isPointer})
+              // reset form
+              this.name = undefined;
+              this.selectedType = undefined;
+              this.isUnique = false;
+            } else {
+              this.isUnique = true;
+            }
+          })
+
+          this.isReserved = false;
+        } else {
+          this.isReserved = true;
+        }
+      })
+
+      this.isUniqueInDataStruct = false;
     } else {
-      this.isUniqueDisplayError = true;
+      this.isUniqueInDataStruct = true;
     }
   }
 
