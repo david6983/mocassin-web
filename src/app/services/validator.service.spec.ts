@@ -69,21 +69,12 @@ describe('UtilityServiceService', () => {
     req.flush(reservedWords);
   });
 
-  it('#isNameSyntaxFollowCStandard should verify that a word follow the C syntax', () => {
-    expect(service.isNameSyntaxFollowCStandard('foo')).toBe(true);
-    expect(service.isNameSyntaxFollowCStandard('FOO')).toBe(true);
-    expect(service.isNameSyntaxFollowCStandard('bars93')).toBe(true);
-    expect(service.isNameSyntaxFollowCStandard('fo_ee99')).toBe(true);
-    expect(service.isNameSyntaxFollowCStandard('foo-ee')).toBe(false);
-    expect(service.isNameSyntaxFollowCStandard('ff ff')).toBe(false);
-    expect(service.isNameSyntaxFollowCStandard('@e ee-éè')).toBe(false);
-  });
-
   it('#isReservedWord should verify if the given name is reserved by the C language', () => {
+    /*
     reservedWords.forEach((word) => {
       service.isReservedWord(word).subscribe(value => {
         expect(value).toBe(true);
       });
-    });
+    });*/
   });
 });

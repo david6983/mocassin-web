@@ -4,6 +4,9 @@ import {EnumWizardService} from '../../../../services/wizards/enum-wizard.servic
 import {ModeService} from '../../../../services/wizards/mode-service';
 import {ValidatorService} from '../../../../services/validator.service';
 import {TypeEnum} from '../../../../../domain/TypeEnum';
+import {Observable} from 'rxjs';
+import {DataStructureService} from '../../../../services/data-structure.service';
+import {Name} from '../../../../../domain/Name';
 
 @Component({
   selector: 'app-create-enum-wizard-step1',
@@ -21,8 +24,25 @@ import {TypeEnum} from '../../../../../domain/TypeEnum';
             <label for="name">Name</label>
             <input #name="ngModel" id="name" type="text" pKeyFilter="alphanum" required pInputText [(ngModel)]="newName"
                    [ngClass]="{'p-invalid': (name.invalid && submitted) || (name.dirty && name.invalid)}">
-            <small *ngIf="(name.invalid && submitted) || (name.dirty && name.invalid)" class="p-error">The name is required.</small>
-            <small *ngIf="isUniqueDisplayError" class="p-error">The name is not unique in this enum (found in enum attributes in step 2)</small>
+            <small *ngIf="(name.invalid && submitted) || (name.dirty && name.invalid)" class="p-error">The name is required.</small><br>
+            <small *ngIf="isUniqueInDataStruct" class="p-error">The name is not unique in this enum (found in enum attributes in step
+              2)</small><br>
+            <small *ngIf="isUnique" class="p-error">The name is not unique in the project scope (check the names of your data below)</small><br>
+            <small *ngIf="isReserved && !isUniqueInDataStruct" class="p-error">This word is reserved (check in the list below)</small>
+          </div>
+          <div class="p-d-flex">
+            <div class="p-fluid">
+              <p-inplace closable="true">
+                <ng-template pTemplate="display">
+                  Show reserved words by the C language
+                </ng-template>
+                <ng-template pTemplate="content">
+                  <div>
+                    <span *ngFor="let word of (reservedWords | async)" class="p-tag p-tag-warning p-mr-2 p-mb-1">{{ word }}</span>
+                  </div>
+                </ng-template>
+              </p-inplace>
+            </div>
           </div>
         </div>
       </ng-template>
@@ -34,24 +54,36 @@ import {TypeEnum} from '../../../../../domain/TypeEnum';
       </ng-template>
     </p-card>
   `,
-  styles: [
-  ]
+  styles: [`
+    .p-tag {
+      align-items: center;
+      padding: 0.25rem;
+      font-size: 10px;
+    }
+  `]
 })
 export class CreateEnumWizardStep1Component implements OnInit {
   newName: string = undefined;
   submitted: boolean = false;
-  isUniqueDisplayError: boolean = false;
+  isUniqueInDataStruct: boolean = false;
+  isUnique: boolean = false;
+  reservedWords: Observable<string[]>;
+  names: Observable<Name[]>;
+  isReserved: boolean = false;
   mode: string = undefined;
 
   constructor(private router: Router,
               private enumWizardService: EnumWizardService,
               private modeService: ModeService,
               private route: ActivatedRoute,
-              private validator: ValidatorService
+              private validator: ValidatorService,
+              private dataStructureService: DataStructureService
   ) {
   }
 
   ngOnInit(): void {
+    this.names = this.dataStructureService.getNames();
+    this.reservedWords = this.validator.getReservedCWordsList();
     this.newName = this.enumWizardService.getEnumWizardData().name;
     let isModeValid = this.modeService.setAddMode(this.route.snapshot.paramMap.get('mode'));
     if (!isModeValid) {
@@ -64,13 +96,29 @@ export class CreateEnumWizardStep1Component implements OnInit {
     if (this.newName) {
       let isUnique = this.validator.isNameUnique(this.newName, this.enumWizardService.getEnumWizardData(), TypeEnum.ENUM);
       if (isUnique) {
-        this.enumWizardService.enumWizardData.name = this.newName;
-        // we can go the next page
-        this.router.navigate(['createEnum/enum-step2']);
-        this.submitted = true;
-        this.isUniqueDisplayError = false;
+        this.reservedWords.subscribe(words => {
+          if (!this.validator.isReservedWord(this.newName, words)) {
+            this.names.subscribe(names => {
+              if (!this.validator.isReservedWord(this.newName, names.map(names => names.name))) {
+                this.enumWizardService.enumWizardData.name = this.newName;
+                // we can go the next page
+                this.router.navigate(['createEnum/enum-step2']);
+                this.submitted = true;
+                this.isUnique = false;
+              } else {
+                this.isUnique = true;
+              }
+            })
+
+            this.isReserved = false;
+          } else {
+            this.isReserved = true;
+          }
+        })
+
+        this.isUniqueInDataStruct = false;
       } else {
-        this.isUniqueDisplayError = true;
+        this.isUniqueInDataStruct = true;
       }
     }
   }

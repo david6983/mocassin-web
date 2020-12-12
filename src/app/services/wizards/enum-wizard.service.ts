@@ -10,6 +10,7 @@ export class EnumWizardService {
     name: undefined,
     attributes: []
   }
+  previousName: string
 
   constructor() { }
 

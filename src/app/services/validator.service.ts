@@ -42,13 +42,11 @@ export class ValidatorService {
    * list of words : https://beginnersbook.com/2014/01/c-keywords-reserved-words/
    *
    * @param name name to check
+   * @param words
    * @return 'true' if reserved, 'false' if not reserved
    */
-  isReservedWord(name: string): Observable<boolean> {
-    // use pipe instead of subscribe to return a value as Observable
-    return this.getReservedCWordsList().pipe(map(words => {
-      return words.findIndex(w => w === name) !== -1;
-    }));
+  isReservedWord(name: string, words: string[]): boolean {
+    return words.findIndex(w => w === name) !== -1;
   }
 
   /**

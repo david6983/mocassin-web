@@ -4,11 +4,12 @@ import {BehaviorSubject, merge, Observable, of, Subject} from 'rxjs';
 import {Enum} from '../../domain/Enum';
 import {ValidatorService} from './validator.service';
 import {DataStructureIdService} from './data-structure-id.service';
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {catchError, map, tap} from 'rxjs/operators';
 import {Union} from '../../domain/Union';
 import {Struct} from '../../domain/Struct';
 import {TypeEnum} from '../../domain/TypeEnum';
+import {Name} from '../../domain/Name';
 
 @Injectable({
   providedIn: 'root'
@@ -25,7 +26,7 @@ export class DataStructureService {
   private enumSubject = new BehaviorSubject<Enum[]>([]);
   private unionSubject = new BehaviorSubject<Union[]>([]);
   private structSubject = new BehaviorSubject<Struct[]>([]);
-  private nameSubject = new BehaviorSubject<string[]>([]);
+  private nameSubject = new BehaviorSubject<Name[]>([]);
   private packageName = new BehaviorSubject<string>("no_package_name");
 
   constructor(
@@ -67,7 +68,7 @@ export class DataStructureService {
     return this.structSubject.asObservable();
   }
 
-  getNames(): Observable<string[]> {
+  getNames(): Observable<Name[]> {
     return this.nameSubject.asObservable();
   }
 
@@ -112,10 +113,9 @@ export class DataStructureService {
         subject.next(subjectValue);
       })
     // add the name to the list of unique names
-    this.http.post(this.nameUrl, myDataStruct.name)
-      .subscribe(() => {
+    this.http.post<Name>(this.nameUrl, { id: myDataStruct.id, name: myDataStruct.name}).subscribe(name => {
         const subjectV = this.nameSubject.getValue()
-        subjectV.push(myDataStruct.name)
+        subjectV.push(name)
         this.nameSubject.next(subjectV)
       })
   }
@@ -131,10 +131,10 @@ export class DataStructureService {
         subject.next(subjectValue)
       })
     // delete the name to the list of unique names
-    this.http.delete(`${this.nameUrl}?name=${myDataStruct.name}`)
-      .subscribe(() => {
+    this.http.delete<Name>(`${this.nameUrl}/${myDataStruct.id}`)
+      .subscribe(name => {
         const subjectValue = this.nameSubject.getValue()
-        const index: number = subjectValue.findIndex(c => c == myDataStruct.name)
+        const index: number = subjectValue.findIndex(c => c == name)
         subjectValue.splice(index, 1)
         this.nameSubject.next(subjectValue)
       })
@@ -161,17 +161,17 @@ export class DataStructureService {
         subject.next(subjectValue)
       })
     // edit the name to the list of unique names
-    this.http.put(`${this.nameUrl}?name=${myDataStruct.name}`, myDataStruct.name)
-      .subscribe(() => {
+    this.http.put<Name>(`${this.nameUrl}/${myDataStruct.id}`, { id: myDataStruct.id, name: myDataStruct.name})
+      .subscribe(name => {
         const subjectValue = this.nameSubject.getValue()
-        const index: number = subjectValue.findIndex(c => c == myDataStruct.name)
+        const index: number = subjectValue.findIndex(c => c == name)
         subjectValue.splice(index, 1)
         this.nameSubject.next(subjectValue)
       })
   }
 
   listAllNames() {
-    this.http.get<string[]>(this.nameUrl)
+    this.http.get<Name[]>(this.nameUrl)
       .subscribe(data => {
         this.nameSubject.next(data);
       })

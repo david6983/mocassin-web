@@ -40,6 +40,7 @@ import {DropdownModule} from 'primeng/dropdown';
 import { GenerateFinalCodePreviewComponent } from './components/preview/generate-final-code-preview.component';
 import { FinalCodeEditorComponent } from './components/preview/final-code-editor.component';
 import {KeyFilterModule} from 'primeng/keyfilter';
+import {InplaceModule} from 'primeng/inplace';
 
 @NgModule({
   declarations: [
@@ -84,7 +85,8 @@ import {KeyFilterModule} from 'primeng/keyfilter';
     ClipboardModule,
     StepsModule,
     DropdownModule,
-    KeyFilterModule
+    KeyFilterModule,
+    InplaceModule
   ],
   providers: [],
   bootstrap: [AppComponent]

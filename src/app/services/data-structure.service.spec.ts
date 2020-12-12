@@ -327,6 +327,7 @@ describe('DataStructureService', () => {
 
     u1.name = "position2";
     service.editDataStruct(u1, TypeEnum.UNION);
+
     const req = httpMock.expectOne(unionUrl + '/' + u1.id)
     expect(req.request.method).toBe('PUT');
     req.flush(0);
@@ -356,6 +357,7 @@ describe('DataStructureService', () => {
 
     s1.name = "position2";
     service.editDataStruct(s1, TypeEnum.STRUCT);
+
     const req = httpMock.expectOne(structUrl + '/' + s1.id)
     expect(req.request.method).toBe('PUT');
     req.flush(0);
