@@ -5,14 +5,9 @@ import {Enum} from '../../../domain/Enum';
 import {Union} from '../../../domain/Union';
 import {Struct} from '../../../domain/Struct';
 import {MenuItem} from 'primeng/api';
-import {TypeEnum} from '../../../domain/TypeEnum';
 import {CodeModel} from '@ngstack/code-editor';
-import {EnumWizardService} from '../../services/wizards/enum-wizard.service';
-import {Router} from '@angular/router';
-import {UnionWizardService} from '../../services/wizards/union-wizard.service';
-import {StructWizardService} from '../../services/wizards/struct-wizard.service';
 import {RenderService} from '../../services/render.service';
-//TODO refactor all the component
+
 @Component({
   selector: 'app-side-tree-view',
   template: `
@@ -21,56 +16,39 @@ import {RenderService} from '../../services/render.service';
         <p-accordion [multiple]="true">
           <p-accordionTab header="Enums" [selected]="true">
             <div>
-              <div *ngFor="let e of (enums | async)" class="p-card data-row p-d-flex p-jc-between">
-                <div>
-                  <p-checkbox name="unions" value="checked" class="p-mr-2" [disabled]="true"></p-checkbox>
-                  <span class="data-name p-mr-2">{{ e.name }}</span>
-                </div>
-                <div>
-                  <button pButton type="button" (click)="previewEnum(e)" label="Preview"></button>
-                  <button pButton type="button" (click)="editEnum(e)" label="Edit" class="p-button-warning p-mr-2 p-ml-2"></button>
-                  <button pButton type="button" (click)="deleteEnum(e)" label="Delete" class="p-button-danger"></button>
-                </div>
-              </div>
+              <app-tree-view-card *ngFor="let e of (enums | async)"
+                [data]="e"
+                type="enum"
+                (previewEvent)="handlePreview(e, 'enum')"
+              ></app-tree-view-card>
             </div>
           </p-accordionTab>
           <p-accordionTab header="Unions" [selected]="true">
             <div>
-              <div *ngFor="let e of (unions | async)" class="p-card data-row p-d-flex p-jc-between">
-                <div>
-                  <p-checkbox name="unions" value="checked" class="p-mr-2" [disabled]="true"></p-checkbox>
-                  <span class="data-name p-mr-2">{{ e.name }}</span>
-                </div>
-                <div>
-                  <button pButton type="button" (click)="previewUnion(e)" label="Preview"></button>
-                  <button pButton type="button" (click)="editUnion(e)" label="Edit" class="p-button-warning p-mr-2 p-ml-2"></button>
-                  <button pButton type="button" (click)="deleteUnion(e)" label="Delete" class="p-button-danger"></button>
-                </div>
-              </div>
+              <app-tree-view-card *ngFor="let e of (unions | async)"
+                [data]="e"
+                type="union"
+                (previewEvent)="handlePreview(e, 'union')"
+              ></app-tree-view-card>
             </div>
           </p-accordionTab>
           <p-accordionTab header="Struct" [selected]="true">
             <div>
-              <div *ngFor="let e of (structs | async)" class="p-card data-row p-d-flex p-jc-between">
-                <div>
-                  <p-checkbox name="unions" value="checked" class="p-mr-2" [disabled]="true"></p-checkbox>
-                  <span class="data-name p-mr-2">{{ e.name }}</span>
-                </div>
-                <div>
-                  <button pButton type="button" (click)="previewStruct(e)" label="Preview"></button>
-                  <button pButton type="button" (click)="editStruct(e)" label="Edit" class="p-button-warning p-mr-2 p-ml-2"></button>
-                  <button pButton type="button" (click)="deleteStruct(e)" label="Delete" class="p-button-danger"></button>
-                </div>
-              </div>
+              <app-tree-view-card *ngFor="let e of (structs | async)"
+                [data]="e"
+                type="struct"
+                (previewEvent)="handlePreview(e, 'struct')"
+              ></app-tree-view-card>
             </div>
           </p-accordionTab>
         </p-accordion>
       </p-accordionTab>
     </p-accordion>
     <p-dialog header="Code Preview"
-              [(visible)]="displayPreview"
-              *ngIf="codeModel"
-              styleClass="code_dialog">
+      [(visible)]="displayPreview"
+      *ngIf="codeModel"
+      styleClass="code_dialog"
+    >
       <app-ccode-editor
         [filename]="namePreview"
         [content]="contentPreview"
@@ -79,16 +57,6 @@ import {RenderService} from '../../services/render.service';
     </p-dialog>
   `,
   styles: [`
-    .data-row {
-      align-items: center;
-      margin-bottom: 1rem;
-      padding: 1rem;
-    }
-
-    .data-row:hover {
-      background-color: #f1f1f1;
-    }
-
     ::ng-deep .code_dialog {
       width: 40vw;
     }
@@ -113,11 +81,7 @@ export class TreeViewComponent implements OnInit {
   structs: Observable<Struct[]>;
 
   constructor(private dataStructureService: DataStructureService,
-              private enumWizardService: EnumWizardService,
-              private unionWizardService: UnionWizardService,
-              private structWizardService: StructWizardService,
               private renderService: RenderService,
-              private router: Router
   ) {
     this.enums = this.dataStructureService.getEnums();
     this.unions = this.dataStructureService.getUnions();
@@ -127,31 +91,19 @@ export class TreeViewComponent implements OnInit {
   ngOnInit() {
   }
 
-  deleteEnum(e: Enum) {
-    this.dataStructureService.deleteDataStruct(e, TypeEnum.ENUM);
-  }
-
-  deleteUnion(e: Union) {
-    this.dataStructureService.deleteDataStruct(e, TypeEnum.UNION);
-  }
-
-  deleteStruct(e: Struct) {
-    this.dataStructureService.deleteDataStruct(e, TypeEnum.STRUCT);
-  }
-
-  previewEnum(e: Enum) {
+  private previewEnum(e: Enum) {
     this.renderService.renderEnum(e).subscribe(value => {
       this.displayPreviewDialog(e.name, value)
     })
   }
 
-  previewStruct(e: Struct) {
+  private previewStruct(e: Struct) {
     this.renderService.renderStruct(e).subscribe(value => {
       this.displayPreviewDialog(e.name, value)
     })
   }
 
-  previewUnion(e: Union) {
+  private previewUnion(e: Union) {
     this.renderService.renderUnion(e).subscribe(value => {
       this.displayPreviewDialog(e.name, value)
     })
@@ -161,25 +113,26 @@ export class TreeViewComponent implements OnInit {
     this.contentPreview = content;
     this.codeModel = {
       language: 'c',
-      uri: 'main.c',
+      uri: `${name}.c`,
       value: content,
     }
     this.namePreview = name;
     this.displayPreview = true;
   }
 
-  editEnum(e: Enum) {
-    this.enumWizardService.enumWizardData = e;
-    this.router.navigate(['/createEnum/enum-step1/edit']);
-  }
-
-  editUnion(e: Union) {
-    this.unionWizardService.unionWizardData = e;
-    this.router.navigate(['/createUnion/union-step1/edit']);
-  }
-
-  editStruct(e: Struct) {
-    this.structWizardService.structWizardData = e;
-    this.router.navigate(['/createStruct/struct-step1/edit']);
+  handlePreview(data: Enum | Union | Struct, type: string) {
+    if (type) {
+      switch (type) {
+        case "enum":
+          this.previewEnum(<Enum> data)
+          break;
+        case "union":
+          this.previewUnion(<Union> data)
+          break;
+        case "struct":
+          this.previewStruct(<Struct> data)
+          break;
+      }
+    }
   }
 }

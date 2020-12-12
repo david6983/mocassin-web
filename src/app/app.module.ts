@@ -41,6 +41,7 @@ import { GenerateFinalCodePreviewComponent } from './components/preview/generate
 import { FinalCodeEditorComponent } from './components/preview/final-code-editor.component';
 import {KeyFilterModule} from 'primeng/keyfilter';
 import {InplaceModule} from 'primeng/inplace';
+import { TreeViewCardComponent } from './components/main/tree-view-card.component';
 
 @NgModule({
   declarations: [
@@ -64,6 +65,7 @@ import {InplaceModule} from 'primeng/inplace';
     CreateUnionWizardComponent,
     GenerateFinalCodePreviewComponent,
     FinalCodeEditorComponent,
+    TreeViewCardComponent,
   ],
   imports: [
     BrowserModule,
