@@ -35,16 +35,7 @@ import {Name} from '../../../../../domain/Name';
           </div>
           <div class="p-d-flex">
             <div class="p-fluid">
-              <p-inplace closable="true">
-                <ng-template pTemplate="display">
-                  Show reserved words by the C language
-                </ng-template>
-                <ng-template pTemplate="content">
-                  <div>
-                    <span *ngFor="let word of (reservedWords | async)" class="p-tag p-tag-warning p-mr-2 p-mb-1">{{ word }}</span>
-                  </div>
-                </ng-template>
-              </p-inplace>
+              <app-reserved-words-inplace [reservedWords]="reservedWords"></app-reserved-words-inplace>
             </div>
           </div>
         </div>
@@ -57,13 +48,7 @@ import {Name} from '../../../../../domain/Name';
       </ng-template>
     </p-card>
   `,
-  styles: [`
-    .p-tag {
-      align-items: center;
-      padding: 0.25rem;
-      font-size: 10px;
-    }
-  `]
+  styles: []
 })
 export class CreateEnumWizardStep1Component implements OnInit {
   newName: string = undefined;

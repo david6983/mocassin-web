@@ -42,6 +42,7 @@ import { FinalCodeEditorComponent } from './components/preview/final-code-editor
 import {KeyFilterModule} from 'primeng/keyfilter';
 import {InplaceModule} from 'primeng/inplace';
 import { TreeViewCardComponent } from './components/main/tree-view-card.component';
+import { ReservedWordsInplaceComponent } from './components/main/reserved-words-inplace.component';
 
 @NgModule({
   declarations: [
@@ -66,6 +67,7 @@ import { TreeViewCardComponent } from './components/main/tree-view-card.componen
     GenerateFinalCodePreviewComponent,
     FinalCodeEditorComponent,
     TreeViewCardComponent,
+    ReservedWordsInplaceComponent,
   ],
   imports: [
     BrowserModule,

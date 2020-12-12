@@ -10,7 +10,7 @@ import {Router} from '@angular/router';
         <img (click)="redirect()" src="../../../assets/logos/mocassin.svg" height="40" alt="mocassin logo">
       </ng-template>
       <ng-template pTemplate="end">
-        <div class="package-name-text">
+        <div (click)="changePackageName()" class="package-name-text">
           {{ packageName }}
         </div>
       </ng-template>
@@ -19,6 +19,10 @@ import {Router} from '@angular/router';
   styles: [`
     .package-name-text {
       color: saddlebrown;
+    }
+
+    .package-name-text:hover {
+      color: green;
     }
   `]
 })
