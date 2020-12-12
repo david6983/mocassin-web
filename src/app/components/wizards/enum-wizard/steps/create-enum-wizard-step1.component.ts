@@ -24,11 +24,14 @@ import {Name} from '../../../../../domain/Name';
             <label for="name">Name</label>
             <input #name="ngModel" id="name" type="text" pKeyFilter="alphanum" required pInputText [(ngModel)]="newName"
                    [ngClass]="{'p-invalid': (name.invalid && submitted) || (name.dirty && name.invalid)}">
-            <small *ngIf="(name.invalid && submitted) || (name.dirty && name.invalid)" class="p-error">The name is required.</small><br>
-            <small *ngIf="isUniqueInDataStruct" class="p-error">The name is not unique in this enum (found in enum attributes in step
-              2)</small><br>
-            <small *ngIf="isUnique" class="p-error">The name is not unique in the project scope (check the names of your data below)</small><br>
-            <small *ngIf="isReserved && !isUniqueInDataStruct" class="p-error">This word is reserved (check in the list below)</small>
+            <div>
+              <small *ngIf="(name.invalid && submitted) || (name.dirty && name.invalid)" class="p-error">The name is required.</small>
+            </div>
+            <div>
+              <small *ngIf="isUniqueInDataStruct" class="p-error">The name is not unique in this enum (found in step2)</small>
+              <small *ngIf="isUnique" class="p-error">The name is not unique in the project scope (check the names of your data below)</small>
+              <small *ngIf="isReserved && !isUniqueInDataStruct" class="p-error">This word is reserved (check in the list below)</small>
+            </div>
           </div>
           <div class="p-d-flex">
             <div class="p-fluid">

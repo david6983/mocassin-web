@@ -6,7 +6,7 @@ import {MenuItem} from 'primeng/api';
   template: `
     <div class="p-m-2">
       <div class="p-mb-3">
-        <p-steps [model]="items" [readonly]="true" [(activeIndex)]="activeIndex"></p-steps>
+        <p-steps [model]="items"></p-steps>
       </div>
       <router-outlet></router-outlet>
     </div>
@@ -15,7 +15,6 @@ import {MenuItem} from 'primeng/api';
 })
 export class CreateEnumWizardComponent implements OnInit {
   items: MenuItem[];
-  activeIndex: number = 0;
 
   constructor() { }
 
@@ -23,24 +22,15 @@ export class CreateEnumWizardComponent implements OnInit {
     this.items = [
       {
         label: 'Enum infos',
-        routerLink: 'enum-step-1',
-        command: (event: any) => {
-          this.activeIndex = 0;
-        }
+        routerLink: 'enum-step-1'
       },
       {
         label: 'Enum attributes',
-        routerLink: 'enum-step-2',
-        command: (event: any) => {
-          this.activeIndex = 1;
-        }
+        routerLink: 'enum-step-2'
       },
       {
         label: 'Confirm',
-        routerLink: 'enum-step-confirm',
-        command: (event: any) => {
-          this.activeIndex = 2;
-        }
+        routerLink: 'enum-step-confirm'
       }
     ];
   }
