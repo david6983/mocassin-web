@@ -11,6 +11,7 @@ import {EnumWizardService} from '../../services/wizards/enum-wizard.service';
 import {Router} from '@angular/router';
 import {UnionWizardService} from '../../services/wizards/union-wizard.service';
 import {StructWizardService} from '../../services/wizards/struct-wizard.service';
+import {RenderService} from '../../services/render.service';
 //TODO refactor all the component
 @Component({
   selector: 'app-side-tree-view',
@@ -115,6 +116,7 @@ export class TreeViewComponent implements OnInit {
               private enumWizardService: EnumWizardService,
               private unionWizardService: UnionWizardService,
               private structWizardService: StructWizardService,
+              private renderService: RenderService,
               private router: Router
   ) {
     this.enums = this.dataStructureService.getEnums();
@@ -138,19 +140,19 @@ export class TreeViewComponent implements OnInit {
   }
 
   previewEnum(e: Enum) {
-    this.dataStructureService.renderEnum(e).subscribe(value => {
+    this.renderService.renderEnum(e).subscribe(value => {
       this.displayPreviewDialog(e.name, value)
     })
   }
 
   previewStruct(e: Struct) {
-    this.dataStructureService.renderStruct(e).subscribe(value => {
+    this.renderService.renderStruct(e).subscribe(value => {
       this.displayPreviewDialog(e.name, value)
     })
   }
 
   previewUnion(e: Union) {
-    this.dataStructureService.renderUnion(e).subscribe(value => {
+    this.renderService.renderUnion(e).subscribe(value => {
       this.displayPreviewDialog(e.name, value)
     })
   }

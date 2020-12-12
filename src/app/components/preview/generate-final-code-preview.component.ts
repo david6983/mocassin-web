@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {CodeModel} from '@ngstack/code-editor';
 import {DataStructureService} from '../../services/data-structure.service';
+import {RenderService} from '../../services/render.service';
 
 @Component({
   selector: 'app-generate-final-code-preview',
@@ -16,40 +17,26 @@ import {DataStructureService} from '../../services/data-structure.service';
 export class GenerateFinalCodePreviewComponent implements OnInit {
   finalFilename: string;
   generateContentPreview: string;
-  private finalRender: string[] = []
   codeModel: CodeModel;
 
-  constructor(private dataStructureService: DataStructureService) { }
+  constructor(
+    private dataStructureService: DataStructureService,
+    private renderService: RenderService
+  ) { }
 
   ngOnInit(): void {
     this.handleGenerate()
   }
 
-  private handleRenderRes = res => {
-    this.finalRender.push(res)
-    this.finalRender.push("\n\n")
-  }
-  //TODO refactor this function
   handleGenerate(): void {
     this.dataStructureService.getEnums().subscribe(enums => {
       this.dataStructureService.getUnions().subscribe(unions => {
         this.dataStructureService.getStructs().subscribe(structs => {
           this.dataStructureService.getPackageName().subscribe(packageName => {
-            this.finalRender.push("#ifndef ", packageName + "\n", "#define ", packageName + "\n\n")
-            enums.forEach(e => {
-              this.dataStructureService.renderEnum(e).subscribe(res => this.handleRenderRes(res))
-            })
-            unions.forEach(u => {
-              this.dataStructureService.renderUnion(u).subscribe(res => this.handleRenderRes(res))
-            })
-            structs.forEach(s => {
-              this.dataStructureService.renderStruct(s).subscribe(res => this.handleRenderRes(res))
-            })
-            this.finalRender.push("#endif /* ", packageName + " */\n")
-            this.generateContentPreview = this.finalRender.join("");
+            this.generateContentPreview = this.renderService.generate(packageName, enums, unions, structs);
             this.codeModel = {
               language: 'c',
-              uri: 'main.c',
+              uri: `${packageName}.c`,
               value: this.generateContentPreview,
             }
             this.finalFilename = `${packageName}.c`;

@@ -188,39 +188,4 @@ export class DataStructureService {
   getPackageName(): Observable<string> {
     return this.packageName.asObservable()
   }
-  // TODO replace by a service with more advanced templating system
-  renderEnum(e: Enum): Observable<string> {
-    let out = [];
-    out.push(`typedef enum ${e.name} {\n`);
-    e.attributes.forEach(attr => {
-      out.push(`\t${attr.name} = ${attr.value},\n`)
-    });
-    out.push(`} ${e.name};`)
-    return of(out.join(""))
-  }
-
-  renderUnion(e: Union): Observable<string> {
-    let out = [];
-    out.push(`typedef union ${e.name} {\n`);
-    e.attributes.forEach(attr => {
-      let ptr = attr.isPointer ? "*" : "";
-      out.push(`\t${attr.type}${ptr} ${attr.name};\n`)
-    });
-    out.push(`} ${e.name};`)
-    return of(out.join(""))
-  }
-
-  renderStruct(e: Struct): Observable<string> {
-    let out = [];
-    if (e.isDisplayFunctionGenerated) {
-      out.push("// display function will be generated \n");
-    }
-    out.push(`typedef struct ${e.name} {\n`);
-    e.attributes.forEach(attr => {
-      let ptr = attr.isPointer ? "*" : "";
-      out.push(`\t${attr.type}${ptr} ${attr.name};\n`)
-    });
-    out.push(`} ${e.name};`)
-    return of(out.join(""))
-  }
 }
