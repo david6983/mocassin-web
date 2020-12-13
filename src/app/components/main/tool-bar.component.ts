@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {Router} from '@angular/router';
+import {ConfirmationService} from 'primeng/api';
+import {DataStructureService} from '../../services/data-structure.service';
 
 @Component({
   selector: 'app-tool-bar',
@@ -7,7 +9,8 @@ import {Router} from '@angular/router';
     <p-toolbar>
       <div class="container">
         <p-button label="Generate" icon="pi pi-copy" styleClass="p-button-success" (click)="handleGenerate()"></p-button>
-        <p-button label="New Project" icon="pi pi-file" styleClass="p-button-warning" (click)="handleNew()"></p-button>
+        <p-confirmDialog header="Confirmation" icon="pi pi-exclamation-triangle"></p-confirmDialog>
+        <p-button label="New Project" icon="pi pi-file" styleClass="p-button-warning" (click)="confirm($event)"></p-button>
       </div>
     </p-toolbar>
   `,
@@ -29,16 +32,25 @@ import {Router} from '@angular/router';
   `]
 })
 export class ToolBarComponent implements OnInit {
-  constructor(private router: Router) { }
+  constructor(
+    private router: Router,
+    private confirmationService: ConfirmationService,
+    private dataService: DataStructureService
+  ) { }
 
   ngOnInit(): void {
   }
 
-  handleNew(): void {
-    console.log('from toolbar: New');
-  }
-
   handleGenerate() {
     this.router.navigate(["/generate"])
+  }
+
+  confirm(event: Event) {
+    this.confirmationService.confirm({
+      message: 'Are you sure that you want to delete all the data in this project?',
+      accept: () => {
+        this.dataService.deleteAll()
+      }
+    });
   }
 }

@@ -43,6 +43,8 @@ import {KeyFilterModule} from 'primeng/keyfilter';
 import {InplaceModule} from 'primeng/inplace';
 import { TreeViewCardComponent } from './components/main/tree-view-card.component';
 import { ReservedWordsInplaceComponent } from './components/main/reserved-words-inplace.component';
+import {ConfirmationService} from 'primeng/api';
+import {ConfirmDialogModule} from 'primeng/confirmdialog';
 
 @NgModule({
   declarations: [
@@ -90,9 +92,10 @@ import { ReservedWordsInplaceComponent } from './components/main/reserved-words-
     StepsModule,
     DropdownModule,
     KeyFilterModule,
-    InplaceModule
+    InplaceModule,
+    ConfirmDialogModule
   ],
-  providers: [],
+  providers: [ConfirmationService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

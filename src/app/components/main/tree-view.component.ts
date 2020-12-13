@@ -15,31 +15,34 @@ import {RenderService} from '../../services/render.service';
       <p-accordionTab header="User Data Structures" [selected]="true">
         <p-accordion [multiple]="true">
           <p-accordionTab header="Enums" [selected]="true">
-            <div>
+            <div *ngIf="(enums | async).length > 0">
               <app-tree-view-card *ngFor="let e of (enums | async)"
                 [data]="e"
                 type="enum"
                 (previewEvent)="handlePreview(e, 'enum')"
               ></app-tree-view-card>
             </div>
+            <div class="p-error" *ngIf="(enums | async).length == 0">No enums in the project</div>
           </p-accordionTab>
           <p-accordionTab header="Unions" [selected]="true">
-            <div>
+            <div *ngIf="(unions | async).length > 0">
               <app-tree-view-card *ngFor="let e of (unions | async)"
                 [data]="e"
                 type="union"
                 (previewEvent)="handlePreview(e, 'union')"
               ></app-tree-view-card>
             </div>
+            <div class="p-error" *ngIf="(unions | async).length == 0">No unions in the project</div>
           </p-accordionTab>
           <p-accordionTab header="Struct" [selected]="true">
-            <div>
+            <div *ngIf="(structs | async).length > 0">
               <app-tree-view-card *ngFor="let e of (structs | async)"
                 [data]="e"
                 type="struct"
                 (previewEvent)="handlePreview(e, 'struct')"
               ></app-tree-view-card>
             </div>
+            <div class="p-error" *ngIf="(structs | async).length == 0">No structs in the project</div>
           </p-accordionTab>
         </p-accordion>
       </p-accordionTab>

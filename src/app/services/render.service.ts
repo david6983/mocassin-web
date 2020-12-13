@@ -72,6 +72,7 @@ export class RenderService {
   }
 
   generate(packageName: string, enums: Enum[], unions: Union[], structs: Struct[]): string {
+    this.finalRender = [];
     this.addHeader(packageName);
     this.renderDataStructures(enums, unions, structs);
     this.addFooter(packageName);

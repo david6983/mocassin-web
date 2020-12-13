@@ -1,11 +1,10 @@
 import {Injectable} from '@angular/core';
 import {environment} from '../../environments/environment';
-import {BehaviorSubject, merge, Observable, of, Subject} from 'rxjs';
+import {BehaviorSubject, Observable} from 'rxjs';
 import {Enum} from '../../domain/Enum';
 import {ValidatorService} from './validator.service';
 import {DataStructureIdService} from './data-structure-id.service';
-import {HttpClient, HttpHeaders} from '@angular/common/http';
-import {catchError, map, tap} from 'rxjs/operators';
+import {HttpClient} from '@angular/common/http';
 import {Union} from '../../domain/Union';
 import {Struct} from '../../domain/Struct';
 import {TypeEnum} from '../../domain/TypeEnum';
@@ -187,5 +186,17 @@ export class DataStructureService {
 
   getPackageName(): Observable<string> {
     return this.packageName.asObservable()
+  }
+
+  deleteAll() {
+    this.enumSubject.getValue().forEach(v => {
+      this.deleteDataStruct(v, TypeEnum.ENUM)
+    })
+    this.unionSubject.getValue().forEach(v => {
+      this.deleteDataStruct(v, TypeEnum.UNION)
+    })
+    this.structSubject.getValue().forEach(v => {
+      this.deleteDataStruct(v, TypeEnum.STRUCT)
+    })
   }
 }
