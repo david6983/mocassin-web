@@ -56,6 +56,22 @@
           "value": 1
         }
       ]
+    },
+    {
+      "id": "e2fc1882-0dc1-4488-89e6-9e044e9f765b",
+      "name": "TestingNewEnum",
+      "attributes": [
+        {
+          "id": "d76f0a3c-b9f1-4d67-9afa-7833ae7f9deb",
+          "name": "foo",
+          "value": 0
+        },
+        {
+          "id": "6a119a7b-86e6-4da7-af9c-36b58a97c830",
+          "name": "bar",
+          "value": 5
+        }
+      ]
     }
   ],
   "unions": [
@@ -74,17 +90,6 @@
           "name": "matrix",
           "type": "int*",
           "isPointer": true
-        }
-      ]
-    },
-    {
-      "id": "d7848958-a53b-4016-9ab7-939b62f929aa",
-      "name": "toto",
-      "attributes": [
-        {
-          "id": "104d9d79-2a87-4fe5-be34-28a984020916",
-          "name": "ee",
-          "type": "int"
         }
       ]
     }
@@ -132,8 +137,8 @@
       "name": "GPS"
     },
     {
-      "id": "d7848958-a53b-4016-9ab7-939b62f929aa",
-      "name": "toto"
+      "id": "e2fc1882-0dc1-4488-89e6-9e044e9f765b",
+      "name": "TestingNewEnum"
     }
   ],
   "cTypes": [
