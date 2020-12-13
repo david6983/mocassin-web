@@ -22,7 +22,7 @@ module.exports = function (config) {
     },
     coverageReporter: { type: 'html', dir: 'coverage/' },
     reporters: ['progress', 'coverage'],
-    preprocessors: {'**/*.js': ['coverage']},
+    preprocessors: {'src/app/services/**/*.js': ['coverage']},
     port: 9876,
     colors: true,
     logLevel: config.LOG_INFO,

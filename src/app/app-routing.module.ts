@@ -14,7 +14,7 @@ import {CreateStructWizardComponent} from './components/wizards/struct-wizard/cr
 import {CreateStructWizardStep1Component} from './components/wizards/struct-wizard/steps/create-struct-wizard-step1.component';
 import {GenerateFinalCodePreviewComponent} from './components/preview/generate-final-code-preview.component';
 
-const routes: Routes = [
+export const routes: Routes = [
   { path: 'createEnum', component: CreateEnumWizardComponent, children: [
       {path:'', redirectTo: 'enum-step1/add', pathMatch: 'full'},
       {path: 'enum-step1/:mode', component: CreateEnumWizardStep1Component},
