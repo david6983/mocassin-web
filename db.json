@@ -1,0 +1,288 @@
+{
+  "enums": [
+    {
+      "id": "53241cfd-22fb-45cf-8ace-2ec8b35669e5",
+      "name": "RadarPosition",
+      "attributes": [
+        {
+          "id": "b8a4e5b0-df03-4dd9-8417-10e76c5df754",
+          "name": "North",
+          "value": 0
+        },
+        {
+          "id": "8701a5a7-7dff-4d0f-b5b7-8a9edf022df0",
+          "name": "South",
+          "value": 1
+        },
+        {
+          "id": "19a102bf-96d9-47f4-8f76-54470cbf58b8",
+          "name": "East",
+          "value": 2
+        },
+        {
+          "name": "WEST",
+          "value": 3
+        }
+      ]
+    },
+    {
+      "id": "0a238ce3-494e-4c80-93d4-545374a05476",
+      "name": "MeasureOutput",
+      "attributes": [
+        {
+          "id": "ea20e52e-6452-496b-ae03-21d7fe242329",
+          "name": "Radian",
+          "value": 0
+        },
+        {
+          "id": "f15077f9-e3ef-407e-b729-6f33ec1641b6",
+          "name": "Degree",
+          "value": 1
+        }
+      ]
+    },
+    {
+      "id": "6f4b4032-1931-44a4-8752-8211e298e140",
+      "name": "Result",
+      "attributes": [
+        {
+          "id": "4083ccb1-43e8-4d7a-8407-930b51723625",
+          "name": "Ok",
+          "value": 0
+        },
+        {
+          "id": "5d6ff03c-b95b-47b2-b51c-093d73c010bc",
+          "name": "Nothing",
+          "value": 1
+        }
+      ]
+    },
+    {
+      "id": "4390d569-bf01-47a6-be55-483a65767c96",
+      "name": "HelloWorld",
+      "attributes": []
+    },
+    {
+      "id": "6381956a-4a0e-443a-9fc2-9329b11e8b67",
+      "name": "Tacos2",
+      "attributes": []
+    }
+  ],
+  "unions": [
+    {
+      "id": "c5367963-ef52-4d83-9b22-4c8ffe637cae",
+      "name": "DataView",
+      "attributes": [
+        {
+          "id": "08ba154a-cfd4-4c0d-9d2b-e3646f39c977",
+          "name": "TabEntier",
+          "type": "int",
+          "isPointer": true
+        },
+        {
+          "id": "879347a3-ad62-415c-9be8-14d0c48db074",
+          "name": "matrix",
+          "type": "int*",
+          "isPointer": true
+        }
+      ]
+    }
+  ],
+  "structs": [
+    {
+      "id": "bc7fe14c-47dd-49bd-97d4-2281fc6feff6",
+      "isDisplayFunctionGenerated": true,
+      "name": "GPS",
+      "attributes": [
+        {
+          "id": "8d307ffc-8fa4-4ba1-b823-0757939a66dc",
+          "name": "name",
+          "type": "char*"
+        },
+        {
+          "id": "09c891b7-3f36-4482-a8ae-c23fbdc94293",
+          "name": "points",
+          "type": "long double*",
+          "isPointer": true
+        }
+      ]
+    }
+  ],
+  "userVariables": [],
+  "names": [
+    {
+      "id": "53241cfd-22fb-45cf-8ace-2ec8b35669e5",
+      "name": "RadarPosition"
+    },
+    {
+      "id": "0a238ce3-494e-4c80-93d4-545374a05476",
+      "name": "MeasureOutput"
+    },
+    {
+      "id": "6f4b4032-1931-44a4-8752-8211e298e140",
+      "name": "Result"
+    },
+    {
+      "id": "4390d569-bf01-47a6-be55-483a65767c96",
+      "name": "HelloWorld"
+    },
+    {
+      "id": "c5367963-ef52-4d83-9b22-4c8ffe637cae",
+      "name": "DataView"
+    },
+    {
+      "id": "bc7fe14c-47dd-49bd-97d4-2281fc6feff6",
+      "name": "GPS"
+    },
+    {
+      "id": "6381956a-4a0e-443a-9fc2-9329b11e8b67",
+      "name": "Tacos2"
+    }
+  ],
+  "cTypes": [
+    {
+      "cType": "int",
+      "enumValue": "number",
+      "displaySymbol": "%d"
+    },
+    {
+      "cType": "unsigned int",
+      "enumValue": "unsigned_number",
+      "displaySymbol": "%d"
+    },
+    {
+      "cType": "short int",
+      "enumValue": "short_number",
+      "displaySymbol": "%hu"
+    },
+    {
+      "cType": "long int",
+      "enumValue": "long_number",
+      "displaySymbol": "%ld"
+    },
+    {
+      "cType": "float",
+      "enumValue": "real_number",
+      "displaySymbol": "%f"
+    },
+    {
+      "cType": "double",
+      "enumValue": "double_real_number",
+      "displaySymbol": "%lf"
+    },
+    {
+      "cType": "long double",
+      "enumValue": "long_double_real_number",
+      "displaySymbol": "%Le"
+    },
+    {
+      "cType": "char",
+      "enumValue": "character",
+      "displaySymbol": "%c"
+    },
+    {
+      "cType": "unsigned char",
+      "enumValue": "unsigned_character",
+      "displaySymbol": "%u"
+    },
+    {
+      "cType": "void",
+      "enumValue": "void_value",
+      "displaySymbol": "%p"
+    },
+    {
+      "cType": "char*",
+      "enumValue": "string",
+      "displaySymbol": "%s"
+    },
+    {
+      "cType": "int*",
+      "enumValue": "number_ptr",
+      "displaySymbol": "%p"
+    },
+    {
+      "cType": "unsigned int*",
+      "enumValue": "unsigned_number_ptr",
+      "displaySymbol": "%p"
+    },
+    {
+      "cType": "short int*",
+      "enumValue": "short_number_ptr",
+      "displaySymbol": "%p"
+    },
+    {
+      "cType": "long int*",
+      "enumValue": "long_number_ptr",
+      "displaySymbol": "%p"
+    },
+    {
+      "cType": "float*",
+      "enumValue": "real_number_ptr",
+      "displaySymbol": "%p"
+    },
+    {
+      "cType": "double*",
+      "enumValue": "double_real_number_ptr",
+      "displaySymbol": "%p"
+    },
+    {
+      "cType": "long double*",
+      "enumValue": "long_double_real_number_ptr",
+      "displaySymbol": "%p"
+    },
+    {
+      "cType": "char*",
+      "enumValue": "character_ptr",
+      "displaySymbol": "%p"
+    },
+    {
+      "cType": "unsigned char*",
+      "enumValue": "unsigned_character_ptr",
+      "displaySymbol": "%p"
+    },
+    {
+      "cType": "void*",
+      "enumValue": "void_value_ptr",
+      "displaySymbol": "%p"
+    },
+    {
+      "cType": "char**",
+      "enumValue": "string_ptr",
+      "displaySymbol": "%p"
+    }
+  ],
+  "reservedCWords": [
+    "auto",
+    "break",
+    "case",
+    "char",
+    "const",
+    "continue",
+    "default",
+    "do",
+    "int",
+    "long",
+    "register",
+    "return",
+    "short",
+    "signed",
+    "sizeof",
+    "static",
+    "struct",
+    "switch",
+    "typedef",
+    "union",
+    "unsigned",
+    "void",
+    "volatile",
+    "while",
+    "double",
+    "else",
+    "enum",
+    "extern",
+    "float",
+    "for",
+    "goto",
+    "if"
+  ]
+}
