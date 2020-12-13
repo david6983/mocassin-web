@@ -56,16 +56,6 @@
           "value": 1
         }
       ]
-    },
-    {
-      "id": "4390d569-bf01-47a6-be55-483a65767c96",
-      "name": "HelloWorld",
-      "attributes": []
-    },
-    {
-      "id": "6381956a-4a0e-443a-9fc2-9329b11e8b67",
-      "name": "Tacos2",
-      "attributes": []
     }
   ],
   "unions": [
@@ -123,20 +113,12 @@
       "name": "Result"
     },
     {
-      "id": "4390d569-bf01-47a6-be55-483a65767c96",
-      "name": "HelloWorld"
-    },
-    {
       "id": "c5367963-ef52-4d83-9b22-4c8ffe637cae",
       "name": "DataView"
     },
     {
       "id": "bc7fe14c-47dd-49bd-97d4-2281fc6feff6",
       "name": "GPS"
-    },
-    {
-      "id": "6381956a-4a0e-443a-9fc2-9329b11e8b67",
-      "name": "Tacos2"
     }
   ],
   "cTypes": [
