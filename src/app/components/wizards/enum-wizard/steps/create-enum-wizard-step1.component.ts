@@ -75,6 +75,9 @@ export class CreateEnumWizardStep1Component implements OnInit {
       this.router.navigate(['']);
     }
     this.mode = this.modeService.getMode();
+    if (this.mode === "add") {
+      this.enumWizardService.reset();
+    }
   }
 
   nextPage() {
@@ -83,7 +86,7 @@ export class CreateEnumWizardStep1Component implements OnInit {
       if (isUnique) {
         this.reservedWords.subscribe(words => {
           if (!this.validator.isReservedWord(this.newName, words)) {
-            if (!this.validator.isReservedWord(this.newName, this.dataStructureService.getNames().map(names => names.name)) || this.mode == "edit") {
+            if (!this.validator.isReservedName(this.enumWizardService.toName(this.newName), this.dataStructureService.getNames())) {
               this.enumWizardService.enumWizardData.name = this.newName;
               // we can go the next page
               this.router.navigate(['createEnum/enum-step2']);
@@ -107,6 +110,7 @@ export class CreateEnumWizardStep1Component implements OnInit {
   }
 
   cancel() {
+    this.enumWizardService.reset();
     this.router.navigate(['']);
   }
 }

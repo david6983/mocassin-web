@@ -8,6 +8,7 @@ import {Enum} from '../../domain/Enum';
 import {Struct} from '../../domain/Struct';
 import {Union} from '../../domain/Union';
 import {TypeEnum} from '../../domain/TypeEnum';
+import {Name} from '../../domain/Name';
 
 @Injectable({
   providedIn: 'root'
@@ -48,6 +49,10 @@ export class ValidatorService {
    */
   isReservedWord(name: string, words: string[]): boolean {
     return words.findIndex(w => w === name) !== -1;
+  }
+
+  isReservedName(name: Name, words: Name[]): boolean {
+    return words.findIndex(w => w.name === name.name && w.id !== name.id) !== -1;
   }
 
   /**

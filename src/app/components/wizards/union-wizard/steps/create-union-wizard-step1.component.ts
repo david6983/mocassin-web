@@ -76,6 +76,9 @@ export class CreateUnionWizardStep1Component implements OnInit {
       this.router.navigate(['']);
     }
     this.mode = this.modeService.getMode();
+    if (this.mode === "add") {
+      this.unionWizardService.reset();
+    }
   }
 
   nextPage() {
@@ -84,7 +87,7 @@ export class CreateUnionWizardStep1Component implements OnInit {
       if (isUnique) {
         this.reservedWords.subscribe(words => {
           if (!this.validator.isReservedWord(this.newName, words)) {
-            if (!this.validator.isReservedWord(this.newName, this.dataStructureService.getNames().map(names => names.name)) || this.mode == "edit") {
+            if (!this.validator.isReservedName(this.unionWizardService.toName(this.newName), this.dataStructureService.getNames())) {
               this.unionWizardService.unionWizardData.name = this.newName;
               // we can go the next page
               this.router.navigate(['createUnion/union-step2']);
@@ -108,6 +111,7 @@ export class CreateUnionWizardStep1Component implements OnInit {
   }
 
   cancel() {
+    this.unionWizardService.reset();
     this.router.navigate(['']);
   }
 }

@@ -83,6 +83,9 @@ export class CreateStructWizardStep1Component implements OnInit {
       this.router.navigate(['']);
     }
     this.mode = this.modeService.getMode();
+    if (this.mode === "add") {
+      this.structWizardService.reset();
+    }
   }
 
   nextPage() {
@@ -91,7 +94,7 @@ export class CreateStructWizardStep1Component implements OnInit {
       if (isUnique) {
         this.reservedWords.subscribe(words => {
           if (!this.validator.isReservedWord(this.newName, words)) {
-              if (!this.validator.isReservedWord(this.newName, this.dataStructureService.getNames().map(names => names.name)) || this.mode == "edit") {
+              if (!this.validator.isReservedName(this.structWizardService.toName(this.newName), this.dataStructureService.getNames())) {
                 this.structWizardService.structWizardData.name = this.newName;
                 this.structWizardService.structWizardData.isDisplayFunctionGenerated = this.isDisplayFunctionGenerated
                 // we can go the next page
@@ -118,6 +121,7 @@ export class CreateStructWizardStep1Component implements OnInit {
   }
 
   cancel() {
+    this.structWizardService.reset();
     this.router.navigate(['']);
   }
 }

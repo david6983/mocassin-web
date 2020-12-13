@@ -126,7 +126,6 @@ export class CreateUnionWizardStep2Component implements OnInit {
     }
 
     this.types = this.validator.getTypesList();
-    console.log(this.selectedType);
   }
 
   nextPage() {
