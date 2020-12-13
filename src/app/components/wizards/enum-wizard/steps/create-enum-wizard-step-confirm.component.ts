@@ -4,6 +4,7 @@ import {EnumWizardService} from '../../../../services/wizards/enum-wizard.servic
 import {DataStructureService} from '../../../../services/data-structure.service';
 import {TypeEnum} from '../../../../../domain/TypeEnum';
 import {ModeService} from '../../../../services/wizards/mode-service';
+import {Enum} from '../../../../../domain/Enum';
 
 @Component({
   selector: 'app-create-enum-wizard-step-confirm',
@@ -55,7 +56,7 @@ import {ModeService} from '../../../../services/wizards/mode-service';
   ]
 })
 export class CreateEnumWizardStepConfirmComponent implements OnInit {
-  wizardData: {name: any, attributes: any[]};
+  wizardData: Enum;
 
   constructor(private router: Router,
               private enumWizardService: EnumWizardService,
@@ -73,11 +74,10 @@ export class CreateEnumWizardStepConfirmComponent implements OnInit {
 
   submit() {
     let mode = this.modeService.getMode();
-
     if (mode === "add") {
-      this.dataStructureService.addDataStruct(this.enumWizardService.enumWizardData, TypeEnum.ENUM);
+      this.dataStructureService.addDataStruct(this.wizardData, TypeEnum.ENUM);
     } else if (mode === "edit") {
-      this.dataStructureService.editDataStruct(this.enumWizardService.enumWizardData, TypeEnum.ENUM)
+      this.dataStructureService.editDataStruct(this.enumWizardService.getEnumWizardData(), TypeEnum.ENUM)
     }
 
     this.enumWizardService.reset();

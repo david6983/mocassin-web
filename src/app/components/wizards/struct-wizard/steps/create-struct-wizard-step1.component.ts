@@ -61,7 +61,6 @@ export class CreateStructWizardStep1Component implements OnInit {
   isUniqueInDataStruct: boolean = false;
   isUnique: boolean = false;
   reservedWords: Observable<string[]>;
-  names: Observable<Name[]>;
   isReserved: boolean = false;
   submitted: boolean = false;
   mode: string = undefined;
@@ -76,7 +75,6 @@ export class CreateStructWizardStep1Component implements OnInit {
   }
 
   ngOnInit(): void {
-    this.names = this.dataStructureService.getNames();
     this.reservedWords = this.validator.getReservedCWordsList();
     this.newName = this.structWizardService.getStructWizardData().name;
     this.isDisplayFunctionGenerated = this.structWizardService.getStructWizardData().isDisplayFunctionGenerated;
@@ -93,8 +91,7 @@ export class CreateStructWizardStep1Component implements OnInit {
       if (isUnique) {
         this.reservedWords.subscribe(words => {
           if (!this.validator.isReservedWord(this.newName, words)) {
-            this.names.subscribe(names => {
-              if (!this.validator.isReservedWord(this.newName, names.map(names => names.name))) {
+              if (!this.validator.isReservedWord(this.newName, this.dataStructureService.getNames().map(names => names.name)) || this.mode == "edit") {
                 this.structWizardService.structWizardData.name = this.newName;
                 this.structWizardService.structWizardData.isDisplayFunctionGenerated = this.isDisplayFunctionGenerated
                 // we can go the next page
@@ -104,7 +101,6 @@ export class CreateStructWizardStep1Component implements OnInit {
               } else {
                 this.isUnique = true;
               }
-            })
 
             this.isReserved = false;
           } else {

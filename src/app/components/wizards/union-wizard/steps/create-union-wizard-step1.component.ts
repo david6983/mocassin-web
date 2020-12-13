@@ -56,7 +56,6 @@ export class CreateUnionWizardStep1Component implements OnInit {
   isUniqueInDataStruct: boolean = false;
   isUnique: boolean = false;
   reservedWords: Observable<string[]>;
-  names: Observable<Name[]>;
   isReserved: boolean = false;
   mode: string = undefined;
 
@@ -70,7 +69,6 @@ export class CreateUnionWizardStep1Component implements OnInit {
   }
 
   ngOnInit(): void {
-    this.names = this.dataStructureService.getNames();
     this.reservedWords = this.validator.getReservedCWordsList();
     this.newName = this.unionWizardService.getUnionWizardData().name;
     let isModeValid = this.modeService.setAddMode(this.route.snapshot.paramMap.get('mode'));
@@ -86,17 +84,15 @@ export class CreateUnionWizardStep1Component implements OnInit {
       if (isUnique) {
         this.reservedWords.subscribe(words => {
           if (!this.validator.isReservedWord(this.newName, words)) {
-            this.names.subscribe(names => {
-              if (!this.validator.isReservedWord(this.newName, names.map(names => names.name))) {
-                this.unionWizardService.unionWizardData.name = this.newName;
-                // we can go the next page
-                this.router.navigate(['createUnion/union-step2']);
-                this.submitted = true;
-                this.isUnique = false;
-              } else {
-                this.isUnique = true;
-              }
-            })
+            if (!this.validator.isReservedWord(this.newName, this.dataStructureService.getNames().map(names => names.name)) || this.mode == "edit") {
+              this.unionWizardService.unionWizardData.name = this.newName;
+              // we can go the next page
+              this.router.navigate(['createUnion/union-step2']);
+              this.submitted = true;
+              this.isUnique = false;
+            } else {
+              this.isUnique = true;
+            }
 
             this.isReserved = false;
           } else {

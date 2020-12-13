@@ -31,7 +31,6 @@ export class ChangePackageNameFormComponent implements OnInit {
   isReserved: boolean = false;
   isUnique: boolean = false;
   reservedWords: Observable<string[]>;
-  names: Observable<Name[]>;
 
   constructor(
     private dataStructureService: DataStructureService,
@@ -40,22 +39,19 @@ export class ChangePackageNameFormComponent implements OnInit {
 
   ngOnInit(): void {
     this.reservedWords = this.validator.getReservedCWordsList();
-    this.names = this.dataStructureService.getNames();
   }
 
   changePackageName() {
     this.reservedWords.subscribe(words => {
       if (!this.validator.isReservedWord(this.packageName, words)) {
-        this.names.subscribe(names => {
-          if (!this.validator.isReservedWord(this.packageName, names.map(names => names.name))) {
-            this.dataStructureService.editPackageName(this.packageName);
-            this.changedPackageName.emit(this.packageName);
-            this.submitted = true;
-            this.isUnique = false;
-          } else {
-            this.isUnique = true;
-          }
-        })
+        if (!this.validator.isReservedWord(this.packageName, this.dataStructureService.getNames().map(names => names.name))) {
+          this.dataStructureService.editPackageName(this.packageName);
+          this.changedPackageName.emit(this.packageName);
+          this.submitted = true;
+          this.isUnique = false;
+        } else {
+          this.isUnique = true;
+        }
 
         this.isReserved = false;
       } else {

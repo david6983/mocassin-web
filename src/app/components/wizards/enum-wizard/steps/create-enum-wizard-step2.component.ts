@@ -6,7 +6,6 @@ import {ModeService} from '../../../../services/wizards/mode-service';
 import {ValidatorService} from '../../../../services/validator.service';
 import {TypeEnum} from '../../../../../domain/TypeEnum';
 import {Observable} from 'rxjs';
-import {Name} from '../../../../../domain/Name';
 import {DataStructureService} from '../../../../services/data-structure.service';
 
 @Component({
@@ -102,7 +101,6 @@ export class CreateEnumWizardStep2Component implements OnInit {
   value: number = 0;
   attributes: EnumAttribute[] = [];
   reservedWords: Observable<string[]>;
-  names: Observable<Name[]>;
 
   constructor(private router: Router,
               private enumWizardService: EnumWizardService,
@@ -112,7 +110,6 @@ export class CreateEnumWizardStep2Component implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.names = this.dataStructureService.getNames();
     this.reservedWords = this.validator.getReservedCWordsList();
     let wizardData = this.enumWizardService.getEnumWizardData()
     // redirect to the previous step if the name was not defined
@@ -126,6 +123,7 @@ export class CreateEnumWizardStep2Component implements OnInit {
   }
 
   nextPage() {
+    this.enumWizardService.enumWizardData.attributes = this.attributes;
     this.router.navigate(['createEnum/enum-step-confirm']);
     this.submitted = true;
   }
@@ -139,25 +137,21 @@ export class CreateEnumWizardStep2Component implements OnInit {
     if (this.validator.isAttributeNameUnique(this.name, this.enumWizardService.getEnumWizardData(), TypeEnum.ENUM)) {
       this.reservedWords.subscribe(words => {
         if (!this.validator.isReservedWord(this.name, words)) {
-          this.names.subscribe(names => {
-            if (!this.validator.isReservedWord(this.name, names.map(names => names.name))) {
-              // update the form data
-              this.attributes.push({id: undefined, name: this.name, value: this.value})
-              // reset form and increment the value because in a C enum, the value is automatically increased if u don't specify it
-              this.value = this.value + 1;
-              this.name = undefined;
-              this.isUnique = false;
-            } else {
-              this.isUnique = true;
-            }
-          })
+          if (!this.validator.isReservedWord(this.name, this.dataStructureService.getNames().map(names => names.name))) {
+            this.attributes.push({id: undefined, name: this.name, value: this.value})
+            // reset form and increment the value because in a C enum, the value is automatically increased if u don't specify it
+            this.value = this.value + 1;
+            this.name = undefined;
+            this.isUnique = false;
+          } else {
+            this.isUnique = true;
+          }
 
           this.isReserved = false;
         } else {
           this.isReserved = true;
         }
       })
-
       this.isUniqueInDataStruct = false;
     } else {
       this.isUniqueInDataStruct = true;

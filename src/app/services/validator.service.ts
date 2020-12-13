@@ -14,6 +14,7 @@ import {TypeEnum} from '../../domain/TypeEnum';
 })
 export class ValidatorService {
   private NOT_UNIQUE_PROJECT = "The field already exist in another data structure in the project";
+  reservedWords: string[];
 
   // get the API URL of Mocassin from environment variables
   private apiUrl = environment.mocassinApiUrl;
@@ -31,7 +32,7 @@ export class ValidatorService {
     const url = `${this.apiUrl}/reservedCWords`;
     return this.http.get<string[]>(url)
       .pipe(
-        tap(_ => _),
+        tap(words => this.reservedWords = words),
         catchError(this.handleError<string[]>('getReservedCWordsList', []))
       );
   }

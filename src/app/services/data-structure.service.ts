@@ -67,8 +67,8 @@ export class DataStructureService {
     return this.structSubject.asObservable();
   }
 
-  getNames(): Observable<Name[]> {
-    return this.nameSubject.asObservable();
+  getNames(): Name[] {
+    return this.nameSubject.getValue();
   }
 
   getUrlAndSubject(type: TypeEnum): [string, BehaviorSubject<Enum[] | Union[] | Struct[]>] {

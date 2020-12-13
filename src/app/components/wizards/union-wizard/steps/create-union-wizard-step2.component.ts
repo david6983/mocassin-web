@@ -105,7 +105,6 @@ export class CreateUnionWizardStep2Component implements OnInit {
   attributes: UnionAttribute[] = [];
   types: Observable<string[]>;
   reservedWords: Observable<string[]>;
-  names: Observable<Name[]>;
 
   constructor(private router: Router,
               private unionWizardService: UnionWizardService,
@@ -115,7 +114,6 @@ export class CreateUnionWizardStep2Component implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.names = this.dataStructureService.getNames();
     this.reservedWords = this.validator.getReservedCWordsList();
     let wizardData = this.unionWizardService.getUnionWizardData();
 
@@ -132,6 +130,7 @@ export class CreateUnionWizardStep2Component implements OnInit {
   }
 
   nextPage() {
+    this.unionWizardService.unionWizardData.attributes = this.attributes;
     this.router.navigate(['createUnion/union-step-confirm']);
     this.submitted = true;
   }
@@ -145,18 +144,16 @@ export class CreateUnionWizardStep2Component implements OnInit {
     if (this.validator.isAttributeNameUnique(this.name, this.unionWizardService.getUnionWizardData(), TypeEnum.UNION)) {
       this.reservedWords.subscribe(words => {
         if (!this.validator.isReservedWord(this.name, words)) {
-          this.names.subscribe(names => {
-            if (!this.validator.isReservedWord(this.name, names.map(names => names.name))) {
-              // update the form data
-              this.attributes.push({id: undefined, name: this.name, type: this.selectedType, isPointer: this.isPointer})
-              // reset form
-              this.name = undefined;
-              this.selectedType = undefined;
-              this.isUnique = false;
-            } else {
-              this.isUnique = true;
-            }
-          })
+          if (!this.validator.isReservedWord(this.name, this.dataStructureService.getNames().map(names => names.name))) {
+            // update the form data
+            this.attributes.push({id: undefined, name: this.name, type: this.selectedType, isPointer: this.isPointer})
+            // reset form
+            this.name = undefined;
+            this.selectedType = undefined;
+            this.isUnique = false;
+          } else {
+            this.isUnique = true;
+          }
 
           this.isReserved = false;
         } else {

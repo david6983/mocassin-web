@@ -6,7 +6,6 @@ import {ValidatorService} from '../../../../services/validator.service';
 import {TypeEnum} from '../../../../../domain/TypeEnum';
 import {Observable} from 'rxjs';
 import {DataStructureService} from '../../../../services/data-structure.service';
-import {Name} from '../../../../../domain/Name';
 
 @Component({
   selector: 'app-create-enum-wizard-step1',
@@ -56,7 +55,6 @@ export class CreateEnumWizardStep1Component implements OnInit {
   isUniqueInDataStruct: boolean = false;
   isUnique: boolean = false;
   reservedWords: Observable<string[]>;
-  names: Observable<Name[]>;
   isReserved: boolean = false;
   mode: string = undefined;
 
@@ -70,7 +68,6 @@ export class CreateEnumWizardStep1Component implements OnInit {
   }
 
   ngOnInit(): void {
-    this.names = this.dataStructureService.getNames();
     this.reservedWords = this.validator.getReservedCWordsList();
     this.newName = this.enumWizardService.getEnumWizardData().name;
     let isModeValid = this.modeService.setAddMode(this.route.snapshot.paramMap.get('mode'));
@@ -86,17 +83,15 @@ export class CreateEnumWizardStep1Component implements OnInit {
       if (isUnique) {
         this.reservedWords.subscribe(words => {
           if (!this.validator.isReservedWord(this.newName, words)) {
-            this.names.subscribe(names => {
-              if (!this.validator.isReservedWord(this.newName, names.map(names => names.name))) {
-                this.enumWizardService.enumWizardData.name = this.newName;
-                // we can go the next page
-                this.router.navigate(['createEnum/enum-step2']);
-                this.submitted = true;
-                this.isUnique = false;
-              } else {
-                this.isUnique = true;
-              }
-            })
+            if (!this.validator.isReservedWord(this.newName, this.dataStructureService.getNames().map(names => names.name)) || this.mode == "edit") {
+              this.enumWizardService.enumWizardData.name = this.newName;
+              // we can go the next page
+              this.router.navigate(['createEnum/enum-step2']);
+              this.submitted = true;
+              this.isUnique = false;
+            } else {
+              this.isUnique = true;
+            }
 
             this.isReserved = false;
           } else {

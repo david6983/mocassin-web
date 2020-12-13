@@ -76,6 +76,17 @@
           "isPointer": true
         }
       ]
+    },
+    {
+      "id": "d7848958-a53b-4016-9ab7-939b62f929aa",
+      "name": "toto",
+      "attributes": [
+        {
+          "id": "104d9d79-2a87-4fe5-be34-28a984020916",
+          "name": "ee",
+          "type": "int"
+        }
+      ]
     }
   ],
   "structs": [
@@ -119,6 +130,10 @@
     {
       "id": "bc7fe14c-47dd-49bd-97d4-2281fc6feff6",
       "name": "GPS"
+    },
+    {
+      "id": "d7848958-a53b-4016-9ab7-939b62f929aa",
+      "name": "toto"
     }
   ],
   "cTypes": [
