@@ -49,6 +49,7 @@ export class ToolBarComponent implements OnInit {
     this.confirmationService.confirm({
       message: 'Are you sure that you want to delete all the data in this project?',
       accept: () => {
+        this.dataService.newProject();
         this.dataService.deleteAll()
       }
     });

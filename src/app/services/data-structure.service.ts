@@ -36,6 +36,33 @@ export class DataStructureService {
     this.getAll();
   }
 
+  private updateName = name => {
+    const subjectValue = this.nameSubject.getValue()
+    const index: number = subjectValue.findIndex(c => c == name)
+    subjectValue.splice(index, 1)
+    this.nameSubject.next(subjectValue)
+  }
+
+  private editCallback(myDataStruct: Enum | Union | Struct,
+                       type: TypeEnum,
+                       subject: BehaviorSubject<Enum[] | Union[] | Struct[]>
+  ) {
+    const subjectValue = subject.getValue()
+    const index: number = subjectValue.findIndex(c => c.id == myDataStruct.id)
+    switch(type) {
+      case TypeEnum.ENUM:
+        subjectValue.splice(index, 1, <Enum> myDataStruct);
+        break;
+      case TypeEnum.UNION:
+        subjectValue.splice(index, 1, <Union> myDataStruct);
+        break;
+      case TypeEnum.STRUCT:
+        subjectValue.splice(index, 1, <Struct> myDataStruct);
+        break;
+    }
+    subject.next(subjectValue)
+  }
+
   getAll() {
     this.http.get<Enum[]>(this.enumUrl)
       .subscribe(data => {
@@ -131,42 +158,17 @@ export class DataStructureService {
       })
     // delete the name to the list of unique names
     this.http.delete<Name>(`${this.nameUrl}/${myDataStruct.id}`)
-      .subscribe(name => {
-        const subjectValue = this.nameSubject.getValue()
-        const index: number = subjectValue.findIndex(c => c == name)
-        subjectValue.splice(index, 1)
-        this.nameSubject.next(subjectValue)
-      })
+      .subscribe(name => { this.updateName(name) })
   }
 
   editDataStruct(myDataStruct: Enum | Union | Struct, type: TypeEnum) {
     let [url, subject] = this.getUrlAndSubject(type);
 
     this.http.put(`${url}/${myDataStruct.id}`, myDataStruct)
-      .subscribe(() => {
-        const subjectValue = subject.getValue()
-        const index: number = subjectValue.findIndex(c => c.id == myDataStruct.id)
-        switch(type) {
-          case TypeEnum.ENUM:
-            subjectValue.splice(index, 1, <Enum> myDataStruct);
-            break;
-          case TypeEnum.UNION:
-            subjectValue.splice(index, 1, <Union> myDataStruct);
-            break;
-          case TypeEnum.STRUCT:
-            subjectValue.splice(index, 1, <Struct> myDataStruct);
-            break;
-        }
-        subject.next(subjectValue)
-      })
+      .subscribe(() => { this.editCallback(myDataStruct, type, subject) })
     // edit the name to the list of unique names
     this.http.put<Name>(`${this.nameUrl}/${myDataStruct.id}`, { id: myDataStruct.id, name: myDataStruct.name})
-      .subscribe(name => {
-        const subjectValue = this.nameSubject.getValue()
-        const index: number = subjectValue.findIndex(c => c == name)
-        subjectValue.splice(index, 1)
-        this.nameSubject.next(subjectValue)
-      })
+      .subscribe(name => { this.updateName(name) })
   }
 
   listAllNames() {

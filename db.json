@@ -56,22 +56,6 @@
           "value": 1
         }
       ]
-    },
-    {
-      "id": "e2fc1882-0dc1-4488-89e6-9e044e9f765b",
-      "name": "TestingNewEnum",
-      "attributes": [
-        {
-          "id": "d76f0a3c-b9f1-4d67-9afa-7833ae7f9deb",
-          "name": "foo",
-          "value": 0
-        },
-        {
-          "id": "6a119a7b-86e6-4da7-af9c-36b58a97c830",
-          "name": "bar",
-          "value": 5
-        }
-      ]
     }
   ],
   "unions": [
@@ -135,10 +119,6 @@
     {
       "id": "bc7fe14c-47dd-49bd-97d4-2281fc6feff6",
       "name": "GPS"
-    },
-    {
-      "id": "e2fc1882-0dc1-4488-89e6-9e044e9f765b",
-      "name": "TestingNewEnum"
     }
   ],
   "cTypes": [
