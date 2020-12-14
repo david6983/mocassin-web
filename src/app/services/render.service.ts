@@ -8,7 +8,7 @@ import {Struct} from '../../domain/Struct';
   providedIn: 'root'
 })
 export class RenderService {
-  private finalRender: string[] = [];
+  finalRender: string[] = [];
   constructor() { }
 
   private handleRenderRes = res => {
@@ -51,15 +51,15 @@ export class RenderService {
     return of(out.join(""))
   }
 
-  private addHeader(packageName: string) {
+  addHeader(packageName: string) {
     this.finalRender.push("#ifndef ", packageName + "\n", "#define ", packageName + "\n\n")
   }
 
-  private addFooter(packageName: string) {
+  addFooter(packageName: string) {
     this.finalRender.push("#endif /* ", packageName + " */\n")
   }
 
-  private renderDataStructures(enums: Enum[], unions: Union[], structs: Struct[]) {
+  renderDataStructures(enums: Enum[], unions: Union[], structs: Struct[]) {
     enums.forEach(e => {
       this.renderEnum(e).subscribe(res => this.handleRenderRes(res))
     })

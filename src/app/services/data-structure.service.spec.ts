@@ -7,6 +7,7 @@ import {TypeEnum} from '../../domain/TypeEnum';
 import {Enum} from '../../domain/Enum';
 import {Union} from '../../domain/Union';
 import {Struct} from '../../domain/Struct';
+import {getMockEnum, getMockStruct, getMockUnion} from './mock';
 
 describe('DataStructureService', () => {
   let httpMock: HttpTestingController;
@@ -41,59 +42,6 @@ describe('DataStructureService', () => {
     expect(nameReq[0].request.method).toBe('GET');
 
     return [req1, req2, req3, nameReq]
-  }
-
-  function getMockEnum(): Enum {
-    return {
-      id: undefined,
-      name: "position",
-      attributes: [{
-        id: undefined,
-        name: "NORTH",
-        value: 0
-      }, {
-        id: undefined,
-        name: "SOUTH",
-        value: 1
-      }]
-    };
-  }
-
-  function getMockUnion(): Union {
-    return {
-      id: undefined,
-      name: "position",
-      attributes: [{
-        id: undefined,
-        name: "notPrecise",
-        type: "int",
-        isPointer: true,
-      }, {
-        id: undefined,
-        name: "precise",
-        type: "float",
-        isPointer: true,
-      }]
-    };
-  }
-
-  function getMockStruct(): Struct {
-    return {
-      id: "",
-      name: "position",
-      isDisplayFunctionGenerated: false,
-      attributes: [{
-        id: undefined,
-        name: "notPrecise",
-        type: "int",
-        isPointer: true,
-      }, {
-        id: undefined,
-        name: "precise",
-        type: "float",
-        isPointer: true,
-      }]
-    };
   }
 
   const verifyPostData = data => {
