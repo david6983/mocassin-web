@@ -81,10 +81,6 @@ export class ValidatorService {
     );
   }
 
-  notUniqueInProject(): string {
-    return this.NOT_UNIQUE_PROJECT;
-  }
-
   isNameUnique(name: string, data: Enum | Union | Struct, type: TypeEnum): boolean {
     switch(type) {
       case TypeEnum.ENUM:

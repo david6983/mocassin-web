@@ -5,6 +5,8 @@
 This project is the web app version of the [Mocassin](https://github.com/david6983/mocassin) software written in [Kotlin](http://kotlinlang.org/)
 and the ui framework [TornadoFx](https://tornadofx.io/). 
 
+## What is the desktop software Mocassin ?
+
 Mocassin is a graphical interface to generate data structures such as simple linked list in C programming. 
 The idea comes from my first classes of C when I learned how to create linked lists. 
 I wanted to generalize the variables inside linked lists without using `void*`. 
@@ -26,28 +28,21 @@ link the two versions: the generation of the C code using [freemarker](https://f
 that the template can read `kotlin` data structures. Let's say I use a Javascript library like [freemarker Node JS](https://www.npmjs.com/package/freemarker), my templates are nearly
 incompatible with a Javascript json model. I also need to set the path environment variable `JAVA_HOME` which is not convenient for a web app.
     
-Therefore, for the second milestones, I would like the web application to create basic C language such as `Enum`, `Struct`, `Union`. 
-All of this data structures will be grouped and called `user's model`. Then the web application will generate a `.moc` file in order to save this model and which can be imported in the
-desktop app. In a nutshell, only the desktop client can generate C files at the moment until I refactor the template engine system between the two apps.
+Therefore, I decided to create a simpler version of the software to have a most valuable product ready for the users before waiting all features, 
+Now, I would like the web application to create basic C language such as `Enum`, `Struct`, `Union`. 
+All of this data structures will be grouped and called `user's model`. Then the web application will generate a preview the `c` code that can be copied to the clipboard.
 
-This project has been generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.3.5.
+In the future, I would like to see the security risks to make you download a `.moc` file of the code encoded by the app to be compatible with the desktop version
 
-## Development server
+So far, only the desktop client can generate C files at the moment until I refactor the template engine system between the two apps.
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+**NOTE**: This project has been generated with [Angular CLI](https://github.com/angular/angular-cli) version 11.0.1 because I used the [primeng framework](primefaces.org/primeng/showcase/#/).
 
-## Code scaffolding
+## Documentation
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+Go to the [Welcome page](doc/welcome.md) to get more information.
 
-## Build
-
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
+- [Welcome page](doc/welcome.md)
+- [How to install mocassin on your own](doc/install.md)
+- [How to use mocassin](doc/tuto.md)
+- [The design story](doc/design.md)
