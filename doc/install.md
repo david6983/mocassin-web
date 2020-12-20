@@ -35,7 +35,7 @@ Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protrac
 
 ## What to read next
 
-- [Welcome page](doc/welcome.md)
-- [How to use mocassin](doc/tuto.md)
-- [The design story](doc/design.md)
+- [Welcome page](welcome.md)
+- [How to use mocassin](tuto.md)
+- [The design story](design.md)
 

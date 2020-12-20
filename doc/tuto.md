@@ -169,6 +169,6 @@ to your favorite `c` program.
 
 ## What to read next
 
-- [Welcome page](doc/welcome.md)
-- [How to install mocassin on your own](doc/install.md)
-- [The design story](doc/design.md)
+- [Welcome page](welcome.md)
+- [How to install mocassin on your own](install.md)
+- [The design story](design.md)

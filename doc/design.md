@@ -16,7 +16,7 @@ use the application for simple things like generating his or her data.
 
 ## What to read next
 
-- [Welcome page](doc/welcome.md)
-- [How to install mocassin on your own](doc/install.md)
-- [How to use mocassin](doc/tuto.md)
+- [Welcome page](welcome.md)
+- [How to install mocassin on your own](install.md)
+- [How to use mocassin](tuto.md)
 
