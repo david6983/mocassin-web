@@ -2,13 +2,13 @@
 
 # Prerequisites
 
-- Angular Cli **11.0.1** (do not use the **8.3.5** because it's not compatible with primeng)
+- Angular Cli **11.0.1** (do not use the **8.3.5** because it's not compatible with the last version of [primeng](primefaces.org/primeng/showcase/#/))
 - Install `npm i -g json-server`
 - npm
 
 # Development mode
 
-1. Make sure you have `bd.json`
+1. Make sure you have `db.json`
 2. Launch the REST API server `json-server db.json`
 3. `ng serve`
 4. http://localhost:4200/
@@ -32,3 +32,10 @@ Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.
 ## Running end-to-end tests
 
 Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
+
+## What to read next
+
+- [Welcome page](doc/welcome.md)
+- [How to use mocassin](doc/tuto.md)
+- [The design story](doc/design.md)
+

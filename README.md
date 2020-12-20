@@ -32,9 +32,9 @@ incompatible with a Javascript json model. I also need to set the path environme
     
 Therefore, I decided to create a simpler version of the software to have a most valuable product ready for the users before waiting all features, 
 Now, I would like the web application to create basic C language such as `Enum`, `Struct`, `Union`. 
-All of this data structures will be grouped and called `user's model`. Then the web application will generate a preview the `c` code that can be copied to the clipboard.
+All of this data structures will be grouped and called `user's model`. Then the web application will generate a preview of the `c` code that can be copied to the clipboard.
 
-In the future, I would like to see the security risks to make you download a `.moc` file of the code encoded by the app to be compatible with the desktop version
+In the future, I would like to see the security risks of downloading a `.moc` file of the code encoded by the app to be compatible with the desktop version
 
 So far, only the desktop client can generate C files at the moment until I refactor the template engine system between the two apps.
 

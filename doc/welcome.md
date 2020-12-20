@@ -22,7 +22,7 @@ to link the two versions in the future. So far, the web version is a first versi
 to generate a user model (single file) with all the data you added. We will see later on how to create this file.
 
 Concerning the output of the generation, you will probably notice the app do not make you download a `.c` file at the end. In fact, you will get a preview
-in a code editor of the code that you can copy to your clipboard. Why only a preview then ? In fact, concerning the security a website should not make you download
+in a code editor of the code that you can copy to your clipboard. Why only a preview then ? In fact, concerning the security, a website should not make you download
 code that you probably don't know. Maybe it could be malware inside the `c` code. So I decided to let you do this part on your own.
 
 ## What to read next ?

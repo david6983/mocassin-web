@@ -32,13 +32,15 @@ The package name is used to identify the C header generated using `#ifndef`
 
 ![home](screenshots/4-change-package-name.png)
 
-You can start edit the name which should be alphanumeric. The input will not let you insert spaces or special characters.
+You can start edit the name which should be **alphanumeric**. 
+⚠️ The input will not let you insert spaces or special characters. ⚠️ 
 
 
 ![home](screenshots/5-change-package-name-show-reserved-words.png)
 
-if you click on `Show reserved keywords`, a list of reserved words by the `c` language will be displayed. These are the words forbidden for the
-package name. do not use it ! Otherwise here is what's happen !
+if you click on `Show reserved keywords`, a list of reserved words by the `c` language will be displayed. 
+
+⚠️ These are the words forbidden for the package name. do not use it ! Otherwise here is what's happen ! ⚠️ 
 
 ![home](screenshots/6-change-package-name-error.png)
 
@@ -92,7 +94,7 @@ you can give any values by selecting it in the second input otherwise the value 
 
 ![home](screenshots/14-new-enum-attributes-error-1.png)
 
-On the left side, you will find the list of the attributes you entered. You can delete an attribute by clicking on the red cross.
+- On the left side, you will find the list of the attributes you entered. You can delete an attribute by clicking on the red cross.
 
 ![home](screenshots/15-new-enum-attributes-error-2.png)
 
@@ -164,3 +166,9 @@ When you added enough data, just click on the green button `Generate` in the too
 
 This will be the final piece of code you was looking for by openning the app. Just copy it to your clipboard using the bluw button `Copy to Clipboard` and you are ready to add all of this data structures
 to your favorite `c` program.
+
+## What to read next
+
+- [Welcome page](doc/welcome.md)
+- [How to install mocassin on your own](doc/install.md)
+- [The design story](doc/design.md)
