@@ -1,5 +1,7 @@
 # Mocassin Web App - generate data structures in C
 
+![home](doc/screenshots/1-home.png)
+
 ## Introduction
 
 This project is the web app version of the [Mocassin](https://github.com/david6983/mocassin) software written in [Kotlin](http://kotlinlang.org/)
